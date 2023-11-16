@@ -10,11 +10,12 @@ import { uniq } from "../../main";
 
 interface ISignUp {
   gotoChatRoom?: (isToChatRoom: boolean) => void;
+  openJoinDialog?: (isOpenJoinDialog: boolean) => void;
 }
 
 export default function SignUp(props: ISignUp) {
   const generator = new AvatarGenerator();
-  const { gotoChatRoom } = props;
+  const { gotoChatRoom, openJoinDialog } = props;
   const { register, joinRoom } = React.useContext<IContext>(RealDealContext);
 
   const singUpInfo = React.useRef({
@@ -25,6 +26,11 @@ export default function SignUp(props: ISignUp) {
 
   const handleGotoChatRoom = React.useCallback(() => {
     gotoChatRoom && gotoChatRoom(true);
+  }, []);
+
+  const handleOpenJoinDialog = React.useCallback(() => 
+  {
+    openJoinDialog && openJoinDialog(true)
   }, []);
 
   return (
@@ -115,7 +121,9 @@ export default function SignUp(props: ISignUp) {
               }}
             />
             <div className="buttons-wrapper" style={{ width: "250px" }}>
-              <Button className="signin rd-buttons text-button" variant="text">
+              <Button className="signin rd-buttons text-button" 
+                      variant="text"
+                      onClick={handleOpenJoinDialog}>
                 Sign In
               </Button>
               <Button

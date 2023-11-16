@@ -6,7 +6,7 @@ import { Box, Typography } from "@mui/material";
 import { RealDealContext } from "./utils/context";
 import NewsContainer from "./Features/News/newsContainer";
 import AboutUsContainer from "./Features/AboutUs/AboutUsContainer";
-import JoinRoomDialog from "./Features/JoinRoomDialog";
+import JoinRoomDialog from "./Features/JoinRoomDialog/JoinRoomDialog";
 import SignUp from "./Features/Signup";
 import ChatRoomContainer from "./ChatRoom/ChatRoomContainer";
 import SalesContainer from "./SalePage/salesContainer";
@@ -157,7 +157,7 @@ export default function MainContainer() {
                   </div> */}
                 </div>
                 {/** Sign up zone */}
-                <SignUp gotoChatRoom={setGotoChatRoom} />
+                <SignUp gotoChatRoom={setGotoChatRoom} openJoinDialog={setIsOpenDialog}/>
               </div>
             </header>
             {gotoChatRoom ? (

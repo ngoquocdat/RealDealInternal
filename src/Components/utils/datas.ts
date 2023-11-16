@@ -54,6 +54,12 @@ export type Room = {
   lastMessage: string
 }
 
+export type JoinRoomDialog = {
+  id: string,
+  name: string,
+  inputs: string[]
+}
+
 const RealEstates: IRealEstates[] = [
     {
       id: 1,
@@ -605,9 +611,27 @@ const projectImages = [
   },
 ];
 
+const joinRoomDialogs = [
+  {
+    id: "1",
+    name: 'LOG IN',
+    inputs: [
+      'Email address', 'Pasword' 
+    ]
+  },
+  {
+    id: "2",
+    name: 'SIGN UP',
+    inputs: [
+      'Email address', 'Pasword', 'Confirm Pasword' 
+    ]
+  }
+]
+
 export {
     RealEstates,
     carousels,
     getAboutUs, getRooms, chatAvatar,
-    projectImages
+    projectImages,
+    joinRoomDialogs
 };
