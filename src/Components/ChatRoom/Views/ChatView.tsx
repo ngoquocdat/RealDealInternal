@@ -98,15 +98,16 @@ export default function ChatView({ roomId, roomMessages }: ChatRoomListProps)
             </Box>
             <Box component="form"
                 sx={{
-                    display: "flex",
+                    borderTop: 'solid 1px #d9d9d9',
+                    display: 'flex',
                     p: 1,
                 }}
                 onSubmit={(e) => e.preventDefault()}
                 noValidate
                 autoComplete="off">
-                <TextField id="outlined-basic"
+                <TextField
                     label="Type a message"
-                    variant="outlined"
+                    variant="standard"
                     fullWidth
                     value={input}
                     onChange={(e) => setInput(e.target.value)}
@@ -117,7 +118,16 @@ export default function ChatView({ roomId, roomMessages }: ChatRoomListProps)
                             onEnterKeyPressed(e);
                         }
                     }}
-                    sx={{ mr: 1 }}/>
+                    InputProps={{
+                        disableUnderline: true,
+                        sx: {
+                            fontWeight: 600,
+                            fontSize: '1.5rem',
+                            border: 'none',
+                            outline: 'none',
+                            '&::placeholder': { color: 'red', },
+                        }
+                    }}/>
                 <Button variant="contained"
                     type="button" 
                     onClick={onSendButtonClicked} 
