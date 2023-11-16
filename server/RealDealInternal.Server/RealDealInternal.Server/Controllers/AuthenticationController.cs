@@ -68,7 +68,7 @@ public class AuthenticationController : BaseController
 
         await _authenticationService.Register(dto,  cancellationToken);
 
-        return Ok();
+        return Created();
     }
     #endregion
 }
