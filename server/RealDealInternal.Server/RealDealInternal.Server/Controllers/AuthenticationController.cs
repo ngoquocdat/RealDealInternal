@@ -8,6 +8,7 @@ public class AuthenticationController : BaseController
     #endregion
 
     #region [ CTor ]
+    
     public AuthenticationController(IAuthenticationService authenticationService)
     {
         _authenticationService = authenticationService;
@@ -15,7 +16,8 @@ public class AuthenticationController : BaseController
     #endregion
 
     #region [ POST ]
-    [HttpPost]
+
+    [HttpPost("login")]
     [AllowAnonymous]
     public async Task<IActionResult> Login(UserLoginDTO dto, CancellationToken cancellationToken = default)
     {
@@ -36,7 +38,7 @@ public class AuthenticationController : BaseController
         );
     }
 
-    [HttpPost]
+    [HttpPost("loginWithPhoneNumber")]
     [AllowAnonymous]
     public async Task<IActionResult> LoginWithPhoneNumber(PhoneNumberUserLoginDTO dto, CancellationToken cancellationToken = default)
     {
@@ -57,17 +59,16 @@ public class AuthenticationController : BaseController
         );
     }
 
-    [HttpPost]
+    [HttpPost("register")]
     [AllowAnonymous]
     public async Task<IActionResult> Register([FromForm] UserSignUpDTO dto, CancellationToken cancellationToken = default)
     {
         if (dto == null || string.IsNullOrWhiteSpace(dto.UserName) || string.IsNullOrWhiteSpace(dto.Password))
             return BadRequest();
 
-        //var baseConfirmationUrl = $"{Request.Scheme}://{Request.Host.Value}{Request.PathBase.Value}/api/access/confirmEmail/confirm-email?";
-        await _authenticationService.Register(dto, /*baseConfirmationUrl,*/ cancellationToken);
+        await _authenticationService.Register(dto,  cancellationToken);
 
-        return Ok();
+        return Created();
     }
     #endregion
 }

@@ -1,6 +1,6 @@
 ﻿namespace RealDealInternal;
 
-public class MediaRepository : IdentityBaseRepository<Media>, IMediaRepository
+public class MediaRepository : ApplicationBaseRepository<Media>, IMediaRepository
 {
     #region [ Fields ]
 
@@ -8,7 +8,7 @@ public class MediaRepository : IdentityBaseRepository<Media>, IMediaRepository
 
     #region [ CTors ]
 
-    public MediaRepository(IdentityDbContext context) : base(context) { }
+    public MediaRepository(ApplicationDbContext context) : base(context) { }
     #endregion
 
     #region [ Methods ]

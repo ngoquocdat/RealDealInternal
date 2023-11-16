@@ -23,7 +23,7 @@ public class RolesController : BaseController
 
     [AllowAnonymous]
     [HttpPost]
-    public async Task<IActionResult> Create([FromBody] RoleDTO dTO)
+    public async Task<IActionResult> Post([FromBody] RoleDTO dTO)
     {
         var role = _mapper.Map<Role>(dTO);
         await _roleManager.CreateAsync(role);
@@ -39,7 +39,7 @@ public class RolesController : BaseController
     }
 
     [HttpPut("{id}")]
-    public async Task<IActionResult> Update([FromBody] RoleDTO dto)
+    public async Task<IActionResult> Put([FromBody] RoleDTO dto)
     {
         var role = await _roleManager.FindByIdAsync(dto.Id);
         if (role is null)

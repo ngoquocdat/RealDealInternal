@@ -1,4 +1,5 @@
 ﻿using System.Linq.Expressions;
+using Microsoft.EntityFrameworkCore;
 
 namespace RealDealInternal;
 
@@ -40,6 +41,9 @@ public class UserRepository : IUserRepository
 
     public Task<User?> FindByPhoneNumberAsync(string phoneNumber, CancellationToken cancellationToken)
         => userManager.FindByPhoneNumberAsync(phoneNumber, cancellationToken);
+
+    public async Task<User?> FindBySignalRConnectionStringId(string connectionId, CancellationToken cancellationToken = default!)
+        => await userManager.FindAll(x => x.SignalRConnectionId == connectionId).FirstOrDefaultAsync(cancellationToken);
 
     #endregion
 

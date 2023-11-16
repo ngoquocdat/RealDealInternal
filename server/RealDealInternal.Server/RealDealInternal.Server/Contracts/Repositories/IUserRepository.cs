@@ -11,6 +11,7 @@ public interface IUserRepository
     Task<User?> FindByPhoneNumberAsync(string phoneNumber, CancellationToken cancellationToken = default!);
     Task<Microsoft.AspNetCore.Identity.SignInResult> CheckPasswordSignInAsync(User user, string password, bool lockoutOnFailure);
     IQueryable<User> FindAll(Expression<Func<User, bool>>? predicate = null);
+    Task<User?> FindBySignalRConnectionStringId(string connectionId, CancellationToken cancellationToken = default!);
     #endregion
 
     #region [ MUTATES ]

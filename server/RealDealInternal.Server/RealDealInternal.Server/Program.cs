@@ -2,10 +2,36 @@ using Azure.Storage;
 using Azure.Storage.Blobs;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.OpenApi.Models;
 using RealDealInternal;
 
 var builder = WebApplication.CreateBuilder(args);
 
+
+builder.Services.AddSwaggerGen(c =>
+{
+    c.SwaggerDoc("v1", new OpenApiInfo { Title = "Real Deal", Version = "v1" });
+    c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+    {
+        In = ParameterLocation.Header,
+        Description = "Please insert JWT with Bearer into field",
+        Name = "Authorization",
+        Type = SecuritySchemeType.ApiKey
+    });
+    c.AddSecurityRequirement(new OpenApiSecurityRequirement {
+                {
+                    new OpenApiSecurityScheme
+                    {
+                        Reference = new OpenApiReference
+                            {
+                                Type = ReferenceType.SecurityScheme,
+                                Id = "Bearer"
+                            }
+                        },
+                    new string[] { }
+                }
+              });
+});
 
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(options =>
@@ -50,7 +76,7 @@ builder.Services.AddCors(options =>
               .AllowCredentials();
     });
 });
-
+builder.Services.AddSignalR();
 
 builder.Services.Configure<AzureStorageConfig>(builder.Configuration.GetSection("AzureStorageConfig"));
 builder.Services.Configure<JwtTokenConfig>(builder.Configuration.GetSection("JwtTokenConfig"));
@@ -78,10 +104,14 @@ builder.Services.AddSingleton((provider) =>
 });
 
 builder.Services.AddScoped<IUserRepository, UserRepository>()
+                .AddScoped<IRoomRepository, RoomRepository>()
+                .AddScoped<IChatMessageRepository, ChatMessageRepository>()
+                .AddScoped<IRealEstateRepository, RealEstateRepository>()
+                .AddScoped<IFacilityRepository, FacilityRepository>()
                 .AddScoped<IMediaService, AzureBlobService>()
                 .AddScoped<IJwtTokenService, JwtTokenService>()
-                .AddScoped<IAuthenticationService, AuthenticationService>()
-                .AddScoped<IMediaRepository, MediaRepository>();
+                .AddScoped<IMediaRepository, MediaRepository>()
+                .AddScoped<IAuthenticationService, AuthenticationService>();
 builder.Services.Configure<RequestLocalizationOptions>(options =>
 {
     options.DefaultRequestCulture = new RequestCulture("en-US");
@@ -119,7 +149,9 @@ app.UseAuthentication();
 
 app.UseAuthorization();
 
-app.UseEndpoints(endpoints => endpoints.MapControllers());
+app.MapControllers();
+
+app.MapHub<ChatHub>("/chatHub");
 
 
 app.Run();

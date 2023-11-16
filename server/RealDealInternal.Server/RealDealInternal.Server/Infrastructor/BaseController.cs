@@ -1,7 +1,7 @@
 ﻿namespace RealDealInternal;
 
 [ApiController]
-[Route("/api/[controller]/[action]")]
+[Route("api/[controller]")]
 [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
 public class BaseController : ControllerBase
 {

@@ -1,13 +1,13 @@
-﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
 
 namespace RealDealInternal;
 
-public class IdentityBaseRepository<T> : IBaseRepository<T> where T : class
+public class ApplicationBaseRepository<T> : IBaseRepository<T> where T : class
 {
-    protected readonly IdentityDbContext _context;
+    protected readonly ApplicationDbContext _context;
     protected readonly DbSet<T> _dbSet;
-    public IdentityBaseRepository(IdentityDbContext context)
+    public ApplicationBaseRepository(ApplicationDbContext context)
     {
         _context = context;
         _dbSet = _context.Set<T>();
