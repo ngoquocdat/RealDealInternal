@@ -12,6 +12,7 @@ import ErrorOutlineIcon from "@mui/icons-material/ErrorOutline";
 import CloseIcon from "@mui/icons-material/Close";
 import SignUp from "../Signup";
 import "./JoinRoomDialog.scss";
+import { defaultLogin } from "Components/StepsJoinToROOM/datas";
 
 
 export interface SimpleDialogProps {
@@ -31,8 +32,14 @@ export default function JoinRoomDialog(props: SimpleDialogProps)
     const joinRoomDialogService = new JoinRoomDialogService()
     const dialogs = joinRoomDialogService.getDialog()
     const { open, onClose } = props;
-    const { processJoinRoom, joinDialog, register } =
-      React.useContext<IContext>(RealDealContext);
+    const { processJoinRoom, joinDialog, register } = React.useContext<IContext>(RealDealContext);
+
+    const singUpInfo = React.useRef({
+      phoneNumber: defaultLogin.phoneNumber,
+      userName: defaultLogin.userName,
+      userEmail: defaultLogin.userEmail,
+    });
+  
 
     const handleClose = (isAccept: boolean) => {
       onClose();
@@ -56,61 +63,63 @@ export default function JoinRoomDialog(props: SimpleDialogProps)
               maxWidth: '1000px'
             }
         }}>
-          {/* <DialogTitle>
-            {!register.isUserRegistered ? (
-              <Typography/>
-            ) : (
-              <ErrorOutlineIcon color="warning" sx={{ fontSize: 60 }} />
-            )}
-          </DialogTitle> */}
           <DialogContent sx={{padding: '0', overflow: 'hidden'}}>
-              <Grid container 
+            {/*Big Outside Grid Container*/}
+              <Grid className="dialog-grid-container" 
+                container 
                 direction='column' 
                 alignItems='center' 
                 justifyContent='center'
                 sx={{
                   position: 'relative',
-                  backgroundColor: '#f2f2f2',
+                  backgroundColor: '#ffffff',
                 }}>
-              <Grid item>
-                <Box 
+              {/*Company Logo*/}
+              <Grid className="dialog-grid-container" item>
+                <DialogTitle 
                     sx={{
                       position: 'absolute',
                       transform: 'translate(-50%, 130%)',
                       borderRadius: '50%',
                       width: '70px',
                       height: '70px',
-                      boxShadow: '0px 0px 40px 10px rgba(0, 0, 0, 0.2)',
+                      boxShadow: '15px 15px 40px 15px rgba(0, 0, 0, 0.25)',
                       background: '#fffbff',
                       padding: '10px',
                       display: 'flex',
                       justifyContent: 'center',
                       backgroundColor: '#ffcc41'
                     }}>
-                  <Box className="logo"
-                    component="img"
-                    src="https://newhome.qodeinteractive.com/wp-content/themes/newhome/assets/img/logo.svg"
-                    sx={{
-                      width: '60px',
-                      height: '60px',
-                      margin: 'auto',
-                      backgroundColor: 'transparent',
-                    }}/>      
-                </Box>
+                    {!register.isUserRegistered ? (
+                      <Box className="logo"
+                        component="img"
+                        src="https://newhome.qodeinteractive.com/wp-content/themes/newhome/assets/img/logo.svg"
+                        sx={{
+                          width: '60px',
+                          height: '60px',
+                          margin: 'auto',
+                          backgroundColor: 'transparent',
+                        }}/>   
+                    ) : (
+                      <ErrorOutlineIcon color="warning" sx={{ fontSize: 60 }} />
+                    )}
+                </DialogTitle>
               </Grid>
-              <Grid container item xs>
-                <Grid item xs={5}>
-                  <Box sx={{ 
+              {/*Log In And Sign Up Grid Container*/}
+              <Grid className="log-in-and-sign-up-grid-container" container item xs>
+                {/*Log In Grid*/}
+                <Grid className="log-in-grid" item xs={5}>
+                  <Box className="log-in-dialog" sx={{ 
                       display: 'grid',
                       justifyContent: 'center',
                       alignItems: 'center',
                       gridTemplateColumns: 'repeat(5, 1fr)',
-                      width: '590px',
+                      width: '550px',
                       height: '800px',
                       borderRadius: '0 50% 50% 0',
-                      backgroundColor: 'transparent', 
+                      backgroundColor: '#f2f2f2', 
+                      boxShadow: '10px 30px 10px 10px rgba(0, 0, 0, 0.1)', 
                       //position: 'relative',
-                      //boxShadow: '10px 20px 10px 10px rgba(0, 0, 0, 0.2)', 
                       //zIndex: 2,
                     }} >
                     <Box sx={{height: '500px', width: '300px', gridColumn: '2/4'}}>
@@ -151,58 +160,97 @@ export default function JoinRoomDialog(props: SimpleDialogProps)
                     </Box>
                   </Box>
                 </Grid>
-                <Grid item xs={5}>
-                  <Box sx={{ 
-                      display: 'grid',
-                      justifyContent: 'center',
-                      alignItems: 'center',
-                      gridTemplateColumns: 'repeat(5, 1fr)',
-                      width: '590px',
-                      height: '800px',
-                      backgroundColor: '#ffffff', 
-                      //position: 'relative', 
-                      //zIndex: 1,
-                    }}>
-                      {!register.isUserRegistered ? (
-                          <Box sx={{ height: '500px', width: '300px', gridColumn: '3/5'}}>
-                            <Typography variant="h4" >
-                              {dialogs[1].name}
-                            </Typography>
-                            {dialogs[1].inputs.map((input) =>
-                            (<Box sx={{ margin: '40px 0px'}}>
-                                <Typography>
-                                  {input}
-                                </Typography>
-                                <TextField fullWidth
-                                  InputProps={{
-                                      disableUnderline: true,
-                                      sx: {
-                                          fontWeight: 600,
-                                          border: 'none',
-                                          outline: 'none',
-                                          '&::placeholder': { color: 'red', },
-                                          width: '300px'
-                                      }
-                                  }}
-                                  sx={{ backgroundColor: '#f2f2f2' }}
-                                  variant="standard"/>
-                              </Box>
-                            ))}
-                            <Button className="signup rd-buttons contained-button"
-                                    variant={register.isUserRegistered ? "text" : "contained"}>
-                              {dialogs[1].name}
-                            </Button>
-                          </Box>
-                        ) : (
-                          <Box>
-                            <DialogActions>
-                            </DialogActions>
-                          </Box>
-                        )}
-                  </Box>
+                {/*Sign Up Grid*/}
+                <Grid className="sign-up" item xs={5}>
+                  {!register.isUserRegistered ? (
+                    <Box className='sign-up-dialog' 
+                      sx={{ 
+                        display: 'grid',
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                        gridTemplateColumns: 'repeat(5, 1fr)',
+                        width: '590px',
+                        height: '800px',
+                        backgroundColor: 'transparent',
+                        //position: 'relative', 
+                        //zIndex: 1,
+                      }}>
+                        <Box sx={{ height: '500px', width: '300px', gridColumn: '3/5'}}>
+                          <Typography variant="h4" >
+                            {dialogs[1].name}
+                          </Typography>
+                          {dialogs[1].inputs.map((input) =>
+                          (<Box sx={{ margin: '40px 0px'}}>
+                              <Typography>
+                                {input}
+                              </Typography>
+                              <TextField fullWidth
+                                InputProps={{
+                                    disableUnderline: true,
+                                    sx: {
+                                        fontWeight: 600,
+                                        border: 'none',
+                                        outline: 'none',
+                                        '&::placeholder': { color: 'red', },
+                                        width: '300px'
+                                    }
+                                }}
+                                sx={{ backgroundColor: '#f2f2f2' }}
+                                variant="standard"/>
+                            </Box>
+                          ))}
+                          <Button className="signup rd-buttons contained-button"
+                                  variant={register.isUserRegistered ? "text" : "contained"}
+                                  onClick={(evt?: React.MouseEvent) => {
+                                    const _isRegistered =
+                                      JSON.stringify(defaultLogin) ===
+                                      JSON.stringify(singUpInfo.current);
+                                    register.setIsUserRegistered(_isRegistered);
+                                  }}>
+                            {dialogs[1].name}
+                          </Button>
+                        </Box>
+                    </Box>
+                  ) : (
+                    <Box>
+                      <DialogContent className="dialog-content">
+                        <DialogContentText id="alert-dialog-slide-description">
+                          <Typography sx={{ marginBottom: "15px" }}>
+                            Quý khách đang muốn tham gia phòng tư vấn về{" "}
+                            <b>Bất động sản AAA</b>
+                          </Typography>
+                          <Typography sx={{ marginBottom: "15px" }}>
+                            Trước khi tiến hành tham gia phòng tư vấn bạn phải thực hiện một
+                            khoản phí tham gia phòng.
+                          </Typography>
+                          <Typography sx={{ marginBottom: "15px" }}>
+                            Nhấn nút Chấp nhận.Nếu bạn vẫn muốn tiếp tục tham gia phòng tư
+                            vấn. Nhấn nút Hủy để quay lại trang tin RealDeal.
+                          </Typography>
+                        </DialogContentText>
+                      </DialogContent>
+                      <DialogActions>
+                        <Button
+                          className="join-warning rd-buttons contained-button"
+                          onClick={() => handleClose(true)}
+                          sx={{ width: "120px" }}
+                          variant="contained">
+                          Chấp nhận
+                        </Button>
+                        <Button
+                          className="join-warning rd-buttons text-button"
+                          onClick={() => handleClose(false)}
+                          sx={{ width: "120px" }}
+                          variant="text">
+                          Hủy
+                        </Button>
+                      </DialogActions>
+                    </Box>
+                  )}
                 </Grid>
               </Grid>
             </Grid>
+            {/*Close Button*/}
             <IconButton
               aria-label="close"
               onClick={() => handleClose(false)}
@@ -214,46 +262,6 @@ export default function JoinRoomDialog(props: SimpleDialogProps)
               }}>
               <CloseIcon />
             </IconButton>
-            {/* {!register.isUserRegistered ? (
-              <SignUp />
-            ) : (
-              <Box>
-                <DialogContent className="dialog-content">
-                  <DialogContentText id="alert-dialog-slide-description">
-                    <Typography sx={{ marginBottom: "15px" }}>
-                      Quý khách đang muốn tham gia phòng tư vấn về{" "}
-                      <b>Bất động sản AAA</b>
-                    </Typography>
-                    <Typography sx={{ marginBottom: "15px" }}>
-                      Trước khi tiến hành tham gia phòng tư vấn bạn phải thực hiện một
-                      khoản phí tham gia phòng.
-                    </Typography>
-                    <Typography sx={{ marginBottom: "15px" }}>
-                      Nhấn nút Chấp nhận.Nếu bạn vẫn muốn tiếp tục tham gia phòng tư
-                      vấn. Nhấn nút Hủy để quay lại trang tin RealDeal.
-                    </Typography>
-                  </DialogContentText>
-                </DialogContent>
-                <DialogActions>
-                  <Button
-                    className="join-warning rd-buttons contained-button"
-                    onClick={() => handleClose(true)}
-                    sx={{ width: "120px" }}
-                    variant="contained"
-                  >
-                    Chấp nhận
-                  </Button>
-                  <Button
-                    className="join-warning rd-buttons text-button"
-                    onClick={() => handleClose(false)}
-                    sx={{ width: "120px" }}
-                    variant="text"
-                  >
-                    Hủy
-                  </Button>
-                </DialogActions>
-              </Box>
-            )} */}
           </DialogContent>
       </Dialog>
     );
