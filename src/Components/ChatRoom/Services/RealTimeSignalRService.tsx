@@ -6,13 +6,10 @@ let connection: HubConnection | null = null;
 export default class RealTimeSignalRService
 {
     setupSignalRConnection(room: Room) {
-        // connection = new HubConnectionBuilder()
-        //     .withUrl(`http://your-api-url/chatHub?roomId=${roomId}`)
-        //     .withAutomaticReconnect()
-        //     .build();
-
         connection = new HubConnectionBuilder()
-            .withUrl(`https://localhost:44339/`)
+            .withUrl(`https://localhost:44338/chathub`, 
+            // { accessTokenFactory: () => "token" }
+            )
             .withAutomaticReconnect()
             .build();
 
@@ -22,7 +19,7 @@ export default class RealTimeSignalRService
             });
         }
 
-        connection.on('ReceiveMessage', (user, message) => {
+        connection.on('ChatHub', (user, message) => {
             console.log(user, message);
         });
     }
