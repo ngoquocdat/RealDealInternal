@@ -6,11 +6,26 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace RealDealInternal.Server.Migrations.ApplicationDb
 {
     /// <inheritdoc />
-    public partial class rooms_realestate_entities : Migration
+    public partial class initial_migration : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.CreateTable(
+                name: "Medias",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    MediaName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    MediaUrl = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    TimeUpload = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Type = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Medias", x => x.Id);
+                });
+
             migrationBuilder.CreateTable(
                 name: "RealEstates",
                 columns: table => new
@@ -77,6 +92,7 @@ namespace RealDealInternal.Server.Migrations.ApplicationDb
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Status = table.Column<int>(type: "int", nullable: false),
                     RealEstateId = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
                 },
                 constraints: table =>
@@ -135,6 +151,9 @@ namespace RealDealInternal.Server.Migrations.ApplicationDb
 
             migrationBuilder.DropTable(
                 name: "Facility");
+
+            migrationBuilder.DropTable(
+                name: "Medias");
 
             migrationBuilder.DropTable(
                 name: "UserRooms");

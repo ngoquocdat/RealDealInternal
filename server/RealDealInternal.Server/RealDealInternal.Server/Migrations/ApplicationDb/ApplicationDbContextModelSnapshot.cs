@@ -187,6 +187,9 @@ namespace RealDealInternal.Server.Migrations.ApplicationDb
                     b.Property<Guid?>("RealEstateId")
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
                     b.HasIndex("RealEstateId");
