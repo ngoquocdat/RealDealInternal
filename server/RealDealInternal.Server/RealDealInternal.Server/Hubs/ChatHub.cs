@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.SignalR;
 
 namespace RealDealInternal;
 
+[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
 public class ChatHub : Hub
 {
     #region [Services]
