@@ -1,20 +1,21 @@
 import React from "react";
-import { Box, Button, Chip, TextField } from "@mui/material";
+import { Avatar, Box, Button, Chip, TextField, Typography } from "@mui/material";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import { AvatarGenerator } from "random-avatar-generator";
 import { IContext, RealDealContext } from "../../utils/context";
 
-import "./index.scss";
+import "./SignUp.scss";
 import { defaultLogin } from "../../StepsJoinToROOM/datas";
 import { uniq } from "../../main";
 
 interface ISignUp {
   gotoChatRoom?: (isToChatRoom: boolean) => void;
+  openJoinDialog?: (isOpenJoinDialog: boolean) => void;
 }
 
 export default function SignUp(props: ISignUp) {
   const generator = new AvatarGenerator();
-  const { gotoChatRoom } = props;
+  const { gotoChatRoom, openJoinDialog } = props;
   const { register, joinRoom } = React.useContext<IContext>(RealDealContext);
 
   const singUpInfo = React.useRef({
@@ -23,8 +24,14 @@ export default function SignUp(props: ISignUp) {
     userEmail: defaultLogin.userEmail,
   });
 
-  const handleGotoChatRoom = React.useCallback(() => {
+  const handleGotoChatRoom = React.useCallback(() => 
+  {
     gotoChatRoom && gotoChatRoom(true);
+  }, []);
+
+  const handleOpenJoinDialog = React.useCallback(() => 
+  {
+    openJoinDialog && openJoinDialog(true)
   }, []);
 
   return (
@@ -37,11 +44,10 @@ export default function SignUp(props: ISignUp) {
             src="https://imgs.search.brave.com/qJt1RbPKmLuKTgGLuGn3aWFt9zfEJRQ3KRZncC--40o/rs:fit:500:0:0/g:ce/aHR0cHM6Ly9pbWcu/ZnJlZXBpay5jb20v/ZnJlZS12ZWN0b3Iv/YnVzaW5lc3NtYW4t/Y2hhcmFjdGVyLWF2/YXRhci1pc29sYXRl/ZF8yNDg3Ny02MDEx/MS5qcGc_c2l6ZT02/MjYmZXh0PWpwZw"
             style={{
               backgroundColor: "#D9D9D9",
-              width: "60px",
-              height: "60px",
+              width: "40px",
+              height: "40px",
               backgroundImage: generator.generateRandomAvatar(),
-            }}
-          />
+            }}/>
           <div className="user-info">
             <b style={{ display: "inline-flex", gap: "15px" }}>
               {defaultLogin.userName}
@@ -53,9 +59,7 @@ export default function SignUp(props: ISignUp) {
                 justifyContent: "center",
                 alignItems: "center",
                 gap: "10px",
-                paddingTop: "5px",
-              }}
-            >
+              }}>
               Chat rooms:
               {joinRoom.userJoinedRoom?.length ? (
                 <Box>
@@ -67,8 +71,7 @@ export default function SignUp(props: ISignUp) {
                         color: "#fff",
                         fontWeight: 600,
                       }}
-                      onClick={handleGotoChatRoom}
-                    />
+                      onClick={handleGotoChatRoom}/>
                   ))}
                 </Box>
               ) : (
@@ -79,7 +82,7 @@ export default function SignUp(props: ISignUp) {
         </div>
       ) : (
         <>
-          <div className="left-wrapper">
+        {/* <div className="left-wrapper">
             <TextField
               sx={{ width: 250 }}
               required
@@ -102,8 +105,8 @@ export default function SignUp(props: ISignUp) {
                 singUpInfo.current.userEmail = evt?.target.value;
               }}
             />
-          </div>
-          <div className="right-wrapper">
+          </div> */}
+          {/* <div className="right-wrapper">
             <TextField
               sx={{ width: 250 }}
               id="user-name-required"
@@ -114,11 +117,30 @@ export default function SignUp(props: ISignUp) {
                 singUpInfo.current.userName = evt?.target.value;
               }}
             />
-            <div className="buttons-wrapper" style={{ width: "250px" }}>
-              <Button className="signin rd-buttons text-button" variant="text">
-                Sign In
+          </div> */}
+          <div className="buttons-wrapper" style={{width: "450px", height: '40px',}}>
+              <Box sx={{ display: 'flex', alignItems: 'center', gap: '10px', border: 'solid 1px #d9d9d9', borderRadius: '40px' }}>
+                  <Box sx={{ height: '35px', width: '35px', border: 'solid 1px #d9d9d9', borderRadius: '50%', padding: '3px'}}>
+                      <Avatar sx={{ height: '35px', width: '35px'}}/>
+                  </Box>
+                  <Typography 
+                    sx={{ 
+                      width: '200px', 
+                      display: 'flex',
+                      justifyContent: 'start',
+                      alignItems: 'center',  
+                      textAlign: 'start'
+                    }}>
+                    You Are Not Login Yet
+                  </Typography>
+              </Box>
+              <Button className="signup rd-buttons contained-button" 
+                      variant={register.isUserRegistered ? "text" : "contained"}
+                      onClick={handleOpenJoinDialog}>
+                Register / Login
               </Button>
-              <Button
+
+              {/* <Button
                 className="signup rd-buttons contained-button"
                 variant={register.isUserRegistered ? "text" : "contained"}
                 onClick={(evt?: React.MouseEvent) => {
@@ -126,11 +148,9 @@ export default function SignUp(props: ISignUp) {
                     JSON.stringify(defaultLogin) ===
                     JSON.stringify(singUpInfo.current);
                   register.setIsUserRegistered(_isRegistered);
-                }}
-              >
+                }}>
                 Sign Up
-              </Button>
-            </div>
+              </Button> */}
           </div>
         </>
       )}
