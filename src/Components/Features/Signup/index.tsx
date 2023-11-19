@@ -5,7 +5,7 @@ import { AvatarGenerator } from "random-avatar-generator";
 import { IContext, RealDealContext } from "../../utils/context";
 
 import "./index.scss";
-import { defaultLogin } from "../../StepsJoinToROOM/datas";
+import { defaultLogin } from "Components/StepsToJoinRoom/datas";
 import { uniq } from "../../main";
 
 interface ISignUp {

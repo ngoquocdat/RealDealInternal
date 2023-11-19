@@ -1,5 +1,43 @@
 import { lorem } from "./context";
-export interface IRealEstates {
+
+export const formatter = new Intl.NumberFormat("en-US", {
+    style: "currency",
+    currency: "VND",
+});
+export interface IRealEstateProject 
+{
+    id: number;
+    realEstateId: number;
+    counselor: ICounselor;
+    numberOfRoom: number;
+    rooms: Room[];
+    investor: IInvestor;
+    scale: number;
+    numberOfHouseroom: number;
+    status: string;
+    type: ITypeOfRealEstate[];
+}
+
+export interface ITypeOfRealEstate
+{
+    id: number;
+    type: string;
+}
+
+export interface ICounselor
+{
+    id: number;
+    name: string;
+}
+
+export interface IInvestor
+{
+    id: number,
+    name: string
+}
+
+export interface IRealEstates 
+{
     id: number,
     title: string,
     image: string,
@@ -53,6 +91,78 @@ export type Room = {
   lastTimeChat: string,
   lastMessage: string
 }
+
+const Investors: IInvestor[] =
+[
+    { id: 1, name: "Phan Văn O" },
+    { id: 2, name: "Vương Thị P" },
+    { id: 3, name: "Trịnh Văn Q" },
+    { id: 4, name: "Đào Thị R" },
+    { id: 5, name: "Ngô Văn S" },
+    { id: 6, name: "Lưu Thị T" },
+    { id: 7, name: "Võ Văn U" },
+    { id: 8, name: "Đoàn Thị V" },
+    { id: 9, name: "Hứa Văn W" },
+    { id: 10, name: "Mai Thị X" },
+    { id: 11, name: "Kiều Văn Y" },
+    { id: 12, name: "Khương Thị Z" },
+    { id: 13, name: "Lâm Văn AA" },
+    { id: 14, name: "Phùng Thị BB" },
+]
+
+const Counselors: ICounselor[] =
+[
+    { id: 1, name: "Nguyễn Văn A" },
+    { id: 2, name: "Trần Thị B" },
+    { id: 3, name: "Lê Văn C" },
+    { id: 4, name: "Phạm Thị D" },
+    { id: 5, name: "Hoàng Văn E" },
+    { id: 6, name: "Vũ Thị F" },
+    { id: 7, name: "Đặng Văn G" },
+    { id: 8, name: "Bùi Thị H" },
+    { id: 9, name: "Đỗ Văn I" },
+    { id: 10, name: "Hồ Thị J" },
+    { id: 11, name: "Ngô Văn K" },
+    { id: 12, name: "Dương Thị L" },
+    { id: 13, name: "Lý Văn M" },
+    { id: 14, name: "Đinh Thị N" }
+]
+
+const TypeOfRealEstates: ITypeOfRealEstate[] =
+[
+    {
+        id: 1,
+        type: "chung cư cao cấp",
+    },
+    {
+        id: 2,
+        type: "Căn hộ",
+    },
+    {
+        id: 3,
+        type: "Nhà phố",
+    },
+    {
+        id: 4,
+        type: "Đất nền",
+    },
+    {
+        id: 5,
+        type: "Bất động sản nghỉ dưỡng",
+    },
+    {
+        id: 6,
+        type: "Hoa viên nghĩa trang",
+    },
+    {
+        id: 7,
+        type: "Shophouse và Officetel",
+    },
+    {
+        id: 8,
+        type: "Nhà xưởng",
+    },
+]
 
 const RealEstates: IRealEstates[] = [
     {
@@ -443,6 +553,11 @@ const RealEstates: IRealEstates[] = [
       },
 ];
 
+const RealEstateProjects: IRealEstateProject[] = 
+[
+
+]
+
 const carousels = [
     {
       title: "Thông tin dự án bất động sản CityLAnd",
@@ -605,9 +720,18 @@ const projectImages = [
   },
 ];
 
+const defaultLogin = {
+  phoneNumber: "0934230808",
+  userName: "Ngo Quoc Dat",
+  userEmail: "ngoquocdat093@gmail.com",
+};
+
+
+
 export {
     RealEstates,
     carousels,
     getAboutUs, getRooms, chatAvatar,
-    projectImages
+    projectImages,
+    defaultLogin
 };

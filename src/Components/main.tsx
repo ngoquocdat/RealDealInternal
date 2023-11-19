@@ -10,9 +10,10 @@ import JoinRoomDialog from "./Features/JoinRoomDialog";
 import SignUp from "./Features/Signup";
 import ChatRoomContainer from "./ChatRoom/ChatRoomContainer";
 import SalesContainer from "./SalePage/salesContainer";
-import StepsJoinToRoom from "./StepsJoinToROOM";
+
 
 import testReadFile from "./utils/translate";
+import StepsToJoinRoomContainer from "./StepsToJoinRoom/StepsToJoinRoomContainer";
 
 export function uniq(a: any) {
   return a.sort().filter(function (item: any, pos: any, ary: any) {
@@ -165,7 +166,7 @@ export default function MainContainer() {
             ) : (
               <div className="contents">
                 {isRegistered && selectedREs && isProcessJoinRoom ? (
-                  <StepsJoinToRoom
+                  <StepsToJoinRoomContainer
                     redirectToChatRoom={function (
                       value: React.SetStateAction<boolean>
                     ): void {
