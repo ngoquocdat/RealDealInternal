@@ -1,0 +1,182 @@
+
+.steps-wrapper {
+    .steps {
+        padding: 30px 0px 20px;
+        display: flex;
+        gap: 10px;
+    
+        .process-to-room {
+            background-color: #D9D9D9; 
+            width: calc(100% / 4);
+            height: 60px;
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+
+            &.active {
+                background-color: #FBB713;
+                color: #fff;
+            }
+
+            &:hover {
+                cursor: pointer
+            }
+        }
+    }
+
+    .content-container {
+        background-color: rgb(217 217 217 / 16%);
+        margin-top: 20px;
+        margin-bottom: 50px;
+        padding: 25px 35px;
+        display: grid;
+
+        .contents {
+            grid-column: 1/3;
+
+            .room-info {
+                display: grid;
+                height: fit-content;
+    
+                .info {
+                    display: inline-flex;
+                    gap: 20px;
+                    padding-bottom: 8px;
+                    align-items: center;
+                }
+    
+                .info:nth-child(2) {
+                    padding-bottom: 40px;
+                }
+            }
+        }
+
+        .real-estate-image {
+            display: grid;
+            grid-column: 3/6;
+            grid-gap: 10px;
+
+            div {
+                background-color: #D9D9D9;
+
+                &:nth-child(1) {
+                    grid-column: 1/6;
+                    grid-row: 1/4;
+                }
+
+                &:nth-child(2) {
+                    grid-column: 1/3;
+                    grid-row: 4/7;
+                }
+
+                &:nth-child(3) {
+                    grid-column: 3/6;
+                    grid-row: 4/7;
+                }
+            } 
+        }
+
+        .room-settings {
+            display: flex;
+            justify-content: space-between;
+            grid-column: 1/6;
+            align-items: center;
+            padding-top: 30px;
+
+            .select-room {
+                display: flex;
+                align-items: center;
+                gap: 10px;
+            }
+        }
+
+        .buttons {
+            grid-column: 1/6;
+            padding-top: 40px;
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+        }
+
+        &.payment {
+            display: grid;
+            gap: 35px;
+
+            .payment-info {
+                border-radius: 10px;
+                border: solid 2px #D9D9D9;
+                grid-column: 1 / 6;
+                grid-row: 1 / 3;
+                display: grid;
+                padding: 15px 35px;
+                gap: 15px;
+
+                .info-wrapper {
+                    &:nth-child(1), &:nth-child(2), &:nth-child(3) {
+                        display: flex;
+                        grid-column: 1/4;
+                        gap: 10px
+                    }
+                    &:nth-child(4), &:nth-child(5), &:nth-child(6) {
+                        grid-column: 4/5;
+                        display: flex;
+                        gap: 10px
+                    }
+                    &:nth-child(4) {
+                        grid-row: 1/2;
+                    }
+                    &:nth-child(5) {
+                        grid-row: 2/3;
+                    }
+                }
+            }
+
+            div.payment-method {
+                display: flex;
+                justify-content: space-between;
+                grid-column: 1/5;
+                gap: 30px;
+                padding: 0px 30px;
+
+                label[class*="-payment"] {
+                    border-radius: 10px;
+                    border: solid 2px #D9D9D9;
+                }
+            }
+        }
+    }
+
+    .similar-projects {
+        text-align: left;
+        padding-top: 60px;
+    }
+
+    .selected-project {
+        padding-bottom: 40px;
+
+        .news-item {
+            display: grid;
+            gap: 10px;
+            align-items: center;
+            justify-content: start;
+
+            .image {
+                background: #d9d9d9;
+                grid-column: 1/3;
+                grid-row: 1/4;
+                width: 230px;
+                height: 230px;
+            }
+
+            .info {
+                grid-column: 3/6;
+                text-align: left;
+            }
+
+            .description {
+                grid-column: 3/6;
+                text-align: left;
+            }
+        }
+    }
+}
