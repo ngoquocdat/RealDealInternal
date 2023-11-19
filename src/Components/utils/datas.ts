@@ -568,8 +568,8 @@ const RealEstateProjects: IRealEstateProject[] =
     numberOfRoom: 3,
     rooms: [  ],
     investor: { id: 0, name: "" },
-    scale: Math.floor(Math.random() * 1000) + 500,
-    numberOfHouseroom: 2,
+    scale: Math.floor(Math.random() * 10000) + 500,
+    numberOfHouseroom: Math.floor(Math.random() * 300) + 500,
     status: "Available",
     type: [  ]
   },{
@@ -579,8 +579,8 @@ const RealEstateProjects: IRealEstateProject[] =
     numberOfRoom: 3,
     rooms: [  ],
     investor: { id: 0, name: "" },
-    scale: Math.floor(Math.random() * 1000) + 500,
-    numberOfHouseroom: 2,
+    scale: Math.floor(Math.random() * 10000) + 500,
+    numberOfHouseroom: Math.floor(Math.random() * 300) + 500,
     status: "Available",
     type: [  ]
   },{
@@ -590,8 +590,8 @@ const RealEstateProjects: IRealEstateProject[] =
     numberOfRoom: 3,
     rooms: [  ],
     investor: { id: 0, name: "" },
-    scale: Math.floor(Math.random() * 1000) + 500,
-    numberOfHouseroom: 2,
+    scale: Math.floor(Math.random() * 10000) + 500,
+    numberOfHouseroom: Math.floor(Math.random() * 300) + 500,
     status: "Available",
     type: [  ]
   },{
@@ -601,8 +601,8 @@ const RealEstateProjects: IRealEstateProject[] =
     numberOfRoom: 3,
     rooms: [  ],
     investor: { id: 0, name: "" },
-    scale: Math.floor(Math.random() * 1000) + 500,
-    numberOfHouseroom: 2,
+    scale: Math.floor(Math.random() * 10000) + 500,
+    numberOfHouseroom: Math.floor(Math.random() * 300) + 500,
     status: "Available",
     type: [  ]
   },{
@@ -612,8 +612,8 @@ const RealEstateProjects: IRealEstateProject[] =
     numberOfRoom: 3,
     rooms: [  ],
     investor: { id: 0, name: "" },
-    scale: Math.floor(Math.random() * 1000) + 500,
-    numberOfHouseroom: 2,
+    scale: Math.floor(Math.random() * 10000) + 500,
+    numberOfHouseroom: Math.floor(Math.random() * 300) + 500,
     status: "Available",
     type: [  ]
   },{
@@ -623,8 +623,8 @@ const RealEstateProjects: IRealEstateProject[] =
     numberOfRoom: 3,
     rooms: [  ],
     investor: { id: 0, name: "" },
-    scale: Math.floor(Math.random() * 1000) + 500,
-    numberOfHouseroom: 2,
+    scale: Math.floor(Math.random() * 10000) + 500,
+    numberOfHouseroom: Math.floor(Math.random() * 300) + 500,
     status: "Available",
     type: [  ]
   },{
@@ -634,8 +634,8 @@ const RealEstateProjects: IRealEstateProject[] =
     numberOfRoom: 3,
     rooms: [  ],
     investor: { id: 0, name: "" },
-    scale: Math.floor(Math.random() * 1000) + 500,
-    numberOfHouseroom: 2,
+    scale: Math.floor(Math.random() * 10000) + 500,
+    numberOfHouseroom: Math.floor(Math.random() * 300) + 500,
     status: "Available",
     type: [  ]
   },{
@@ -645,8 +645,8 @@ const RealEstateProjects: IRealEstateProject[] =
     numberOfRoom: 3,
     rooms: [  ],
     investor: { id: 0, name: "" },
-    scale: Math.floor(Math.random() * 1000) + 500,
-    numberOfHouseroom: 2,
+    scale: Math.floor(Math.random() * 10000) + 500,
+    numberOfHouseroom: Math.floor(Math.random() * 300) + 500,
     status: "Available",
     type: [  ]
   },{
@@ -656,8 +656,8 @@ const RealEstateProjects: IRealEstateProject[] =
     numberOfRoom: 3,
     rooms: [  ],
     investor: { id: 0, name: "" },
-    scale: Math.floor(Math.random() * 1000) + 500,
-    numberOfHouseroom: 2,
+    scale: Math.floor(Math.random() * 10000) + 500,
+    numberOfHouseroom: Math.floor(Math.random() * 300) + 500,
     status: "Available",
     type: [  ]
   },{
@@ -667,8 +667,8 @@ const RealEstateProjects: IRealEstateProject[] =
     numberOfRoom: 3,
     rooms: [  ],
     investor: { id: 0, name: "" },
-    scale: Math.floor(Math.random() * 1000) + 500,
-    numberOfHouseroom: 2,
+    scale: Math.floor(Math.random() * 10000) + 500,
+    numberOfHouseroom: Math.floor(Math.random() * 300) + 500,
     status: "Available",
     type: [  ]
   },{
@@ -678,8 +678,8 @@ const RealEstateProjects: IRealEstateProject[] =
     numberOfRoom: 3,
     rooms: [  ],
     investor: { id: 0, name: "" },
-    scale: Math.floor(Math.random() * 1000) + 500,
-    numberOfHouseroom: 2,
+    scale: Math.floor(Math.random() * 10000) + 500,
+    numberOfHouseroom: Math.floor(Math.random() * 300) + 500,
     status: "Available",
     type: [  ]
   },{
@@ -689,8 +689,8 @@ const RealEstateProjects: IRealEstateProject[] =
     numberOfRoom: 3,
     rooms: [  ],
     investor: { id: 0, name: "" },
-    scale: Math.floor(Math.random() * 1000) + 500,
-    numberOfHouseroom: 2,
+    scale: Math.floor(Math.random() * 10000) + 500,
+    numberOfHouseroom: Math.floor(Math.random() * 300) + 500,
     status: "Available",
     type: [  ]
   },{
@@ -700,8 +700,8 @@ const RealEstateProjects: IRealEstateProject[] =
     numberOfRoom: 3,
     rooms: [  ],
     investor: { id: 0, name: "" },
-    scale: Math.floor(Math.random() * 1000) + 500,
-    numberOfHouseroom: 2,
+    scale: Math.floor(Math.random() * 10000) + 500,
+    numberOfHouseroom: Math.floor(Math.random() * 300) + 500,
     status: "Available",
     type: [  ]
   },{
@@ -711,8 +711,8 @@ const RealEstateProjects: IRealEstateProject[] =
     numberOfRoom: 3,
     rooms: [  ],
     investor: { id: 0, name: "" },
-    scale: Math.floor(Math.random() * 1000) + 500,
-    numberOfHouseroom: 2,
+    scale: Math.floor(Math.random() * 10000) + 500,
+    numberOfHouseroom: Math.floor(Math.random() * 300) + 500,
     status: "Available",
     type: [  ]
   },

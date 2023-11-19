@@ -4,7 +4,8 @@ import { roomInfo } from "../datas";
 import { IContext, RealDealContext } from "../../utils/context";
 import { ISettingsRoom } from "../StepsToJoinRoomContainer";
 import { calculateDiscountPrice, handleScrollToTop, } from "Components/utils/rdutil";
-import { IRealEstateProject, formatter } from "Components/utils/datas";
+import { ITypeOfRealEstate, Room, formatter } from "Components/utils/datas";
+import { IRealEstateProject, translate } from "../Models/RealEstateProject ";
 
 interface IStepOne {
   errors: any;
@@ -17,11 +18,9 @@ interface IStepOne {
 
 export default function StepOne(props: IStepOne) {
   const { images, errors, settingsRoom, setError, changeStep, realEstateProjects } = props;
-  const { processJoinRoom, selectedRealEstate } =
-    React.useContext<IContext>(RealDealContext);
-  const [memberCount, setMemberCount] = React.useState<number>(
-    settingsRoom.settings.counter
-  );
+  const { processJoinRoom, selectedRealEstate } =React.useContext<IContext>(RealDealContext);
+  const [ selectedRealEstateProject ] = React.useState<IRealEstateProject>(realEstateProjects[selectedRealEstate?.selectedREs?.id]);
+  const [memberCount, setMemberCount] = React.useState<number>(settingsRoom.settings.counter);
   const [discountPrice, setDiscountPrice] = React.useState<any>(null);
   const stepOneRef = React.useRef(null);
 
@@ -50,16 +49,116 @@ export default function StepOne(props: IStepOne) {
     (() => handleScrollToTop())();
   });
 
+  function PropertyTextField(projectKey: string, projectValue: any) 
+  {
+    return (
+        <Box sx={{display: 'flex', alignItems: 'center', gap: '10px'}}>
+            <Typography sx={{ fontWeight: 600 }}>
+                {translate(projectKey as keyof IRealEstateProject)}
+            </Typography>
+            <TextField
+              disabled
+              sx={{ width: "50px" }}
+              label={""}
+              defaultValue={projectValue}
+              size="small"
+              value={projectValue} />
+        </Box>
+    );
+  }
+
+  function PropertyLabel(projectKey: string, projectValue: any) 
+  {
+    return (
+        <Box sx={{display: 'flex', alignItems: 'center', gap: '10px'}}>
+            <Typography sx={{ fontWeight: 600 }}>
+                {translate(projectKey as keyof IRealEstateProject)}
+            </Typography>
+            <Typography>
+                {projectValue}
+            </Typography>
+        </Box>
+    );
+  }
+
+  function PropertyCombine(projectKey: string, projectValue: any[]) 
+  {
+    return (
+      <Box sx={{display: 'flex', alignItems: 'center', gap: '10px'}}>
+        <Typography sx={{ fontWeight: 600 }}>
+          {translate(projectKey as keyof IRealEstateProject)}
+        </Typography>
+        <Typography>
+          {/* {projectValue.join(", ")} */}
+          {projectValue[0] + " m2" + ", " + projectValue[1] + " căn"}
+        </Typography>
+      </Box>
+    );
+  }
+
+  function PropertyChip(projectKey: string, projectValue: any[]) 
+  {
+
+    return (
+      <Box sx={{display: 'flex', alignItems: 'center', gap: '10px'}}>
+      <Typography sx={{ fontWeight: 600 }}>
+        {translate(projectKey as keyof IRealEstateProject)}
+      </Typography>
+      {projectValue.map((item) => {
+
+          const keys = Object.keys(item);
+          if (keys.includes('room')) 
+          {
+            return <Chip key={item.room} label={item.room} />;
+          } 
+          else if (keys.includes('type')) 
+          {
+            return (
+                <Chip key={item.type} label={item.type} />
+            );
+          }
+        })}
+    </Box>
+    );
+  }
+
+  function PropertyName(propertyName: string, projectValue: any) 
+  {
+    let name = '';
+    if ('name' in projectValue) {
+        name = projectValue.name;
+    }
+
+    return (
+        <Box sx={{display: 'flex', alignItems: 'center', gap: '10px'}}>
+            <Typography sx={{ fontWeight: 600 }}>
+              {translate(propertyName as keyof IRealEstateProject)}
+            </Typography>
+            <Typography>
+              {name}
+            </Typography>
+        </Box>
+    );
+}
+
   return (
     <Box className="content-container" ref={stepOneRef}>
       <Box className="contents">
         <Box className="room-info">
-          {roomInfo.map((info) => (
-              <Box className="info">
-
-
-              </Box>
-          ))}
+            {PropertyLabel('title', selectedRealEstate.selectedREs.title)}
+            {PropertyName('counselor', selectedRealEstateProject.counselor)}
+            {PropertyTextField('numberOfRoom', selectedRealEstateProject.numberOfRoom)}
+            <Typography sx={{textAlign: 'start'}}>
+              (Số lượng thành viên tương tứng với số lượng bất động sản được chọn)
+            </Typography>
+            {PropertyLabel('location', selectedRealEstate.selectedREs.location)}
+            {PropertyName('investor', selectedRealEstateProject.investor)}
+            {PropertyCombine('scale', [selectedRealEstateProject.scale, selectedRealEstateProject.numberOfHouseroom])}
+            {PropertyLabel('pricePerSquare', selectedRealEstate.selectedREs.pricePerSquare + " / m2")}
+            {PropertyLabel('floorArea', selectedRealEstate.selectedREs.floorArea + " m2")}
+            {PropertyLabel('status', selectedRealEstateProject.status)}
+            {PropertyChip('type', selectedRealEstateProject.type)}
+            {PropertyChip('rooms', selectedRealEstateProject.rooms)}
         </Box>
       </Box>
       <Box className="real-estate-image">
