@@ -1,9 +1,10 @@
 import { Box, Button, Checkbox, Typography,
          FormControlLabel, FormGroup, } from "@mui/material";
 import React from "react";
-import { formatter, paymentInfo } from "../datas";
+import { paymentInfo } from "../datas";
 import { IContext, RealDealContext } from "../../utils/context";
 import { ISettings } from "../StepsToJoinRoomContainer";
+import { formatter } from "Components/utils/datas";
 
 interface IStepTwo {
   errors: any;

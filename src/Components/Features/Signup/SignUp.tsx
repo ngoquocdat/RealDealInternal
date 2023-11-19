@@ -3,15 +3,11 @@ import { Avatar, Box, Button, Chip, TextField, Typography } from "@mui/material"
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import { AvatarGenerator } from "random-avatar-generator";
 import { IContext, RealDealContext } from "../../utils/context";
-
-<<<<<<< HEAD:src/Components/Features/Signup/index.tsx
-import "./index.scss";
-import { defaultLogin } from "Components/StepsToJoinRoom/datas";
-=======
-import "./SignUp.scss";
-import { defaultLogin } from "../../StepsJoinToROOM/datas";
->>>>>>> 1f8867996017a6db2a238eab8e904660599e133f:src/Components/Features/Signup/SignUp.tsx
+import { defaultLogin } from "Components/utils/datas";
 import { uniq } from "../../main";
+import "./SignUp.scss";
+
+
 
 interface ISignUp {
   gotoChatRoom?: (isToChatRoom: boolean) => void;
