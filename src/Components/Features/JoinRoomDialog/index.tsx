@@ -17,7 +17,8 @@ import React from "react";
 
 import "./index.scss";
 import { IContext, RealDealContext } from "../../utils/context";
-import SignUp from "../Signup";
+import SignUp from "../Signup/SignUp";
+
 
 export interface SimpleDialogProps {
   open: boolean;

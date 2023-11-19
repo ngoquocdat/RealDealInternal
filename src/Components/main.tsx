@@ -7,13 +7,12 @@ import { RealDealContext } from "./utils/context";
 import NewsContainer from "./Features/News/newsContainer";
 import AboutUsContainer from "./Features/AboutUs/AboutUsContainer";
 import JoinRoomDialog from "./Features/JoinRoomDialog";
-import SignUp from "./Features/Signup";
+import SignUp from "./Features/Signup/SignUp";
 import ChatRoomContainer from "./ChatRoom/ChatRoomContainer";
 import SalesContainer from "./SalePage/salesContainer";
-
-
 import testReadFile from "./utils/translate";
 import StepsToJoinRoomContainer from "./StepsToJoinRoom/StepsToJoinRoomContainer";
+
 
 export function uniq(a: any) {
   return a.sort().filter(function (item: any, pos: any, ary: any) {
@@ -158,7 +157,7 @@ export default function MainContainer() {
                   </div> */}
                 </div>
                 {/** Sign up zone */}
-                <SignUp gotoChatRoom={setGotoChatRoom} />
+                <SignUp openJoinDialog={setIsOpenDialog}/>
               </div>
             </header>
             {gotoChatRoom ? (
