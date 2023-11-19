@@ -12,8 +12,8 @@ using RealDealInternal;
 namespace RealDealInternal.Server.Migrations.ApplicationDb
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20231115080608_rooms_realestate_entities")]
-    partial class rooms_realestate_entities
+    [Migration("20231118153721_initial_migration")]
+    partial class initial_migration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -189,6 +189,9 @@ namespace RealDealInternal.Server.Migrations.ApplicationDb
 
                     b.Property<Guid?>("RealEstateId")
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 

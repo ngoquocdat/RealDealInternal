@@ -7,12 +7,12 @@ import { Box, Typography,
 import { TransitionProps } from "@mui/material/transitions";
 import { Link } from "react-router-dom";
 import { IContext, RealDealContext } from "../../utils/context";
+import { defaultLogin } from "Components/utils/datas";
 import JoinRoomDialogService from "./Services/JoinRoomDialogService";
 import ErrorOutlineIcon from "@mui/icons-material/ErrorOutline";
 import CloseIcon from "@mui/icons-material/Close";
-import SignUp from "../Signup";
 import "./JoinRoomDialog.scss";
-import { defaultLogin } from "Components/StepsJoinToROOM/datas";
+
 
 
 export interface SimpleDialogProps {
@@ -261,6 +261,7 @@ export default function JoinRoomDialog(props: SimpleDialogProps)
                 right: 8,
                 top: 8,
                 color: (theme) => theme.palette.grey[500],
+                zline: 4,
               }}>
               <CloseIcon />
             </IconButton>

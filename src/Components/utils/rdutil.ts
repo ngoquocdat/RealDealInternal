@@ -1,4 +1,4 @@
-import { formatter } from "../StepsJoinToROOM/datas";
+import { formatter } from "./datas";
 
 interface IProperty {
     floorArea: number,

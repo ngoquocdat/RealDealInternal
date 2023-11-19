@@ -97,20 +97,11 @@ public class AuthenticationService : IAuthenticationService
     {
         Guard.IsNotNull(dto);
 
-        using var transaction = await identityDbContext.Database.BeginTransactionAsync(cancellationToken);
-
         var user = mapper.Map<User>(dto);
 
         user.CreatedAt = DateTime.UtcNow;
 
-        var createResult = await userRepository.CreateAsync(user, dto.Password);
-
-        //foreach (var roleId in dto.Roles)
-        //{
-        //    var role = roleManager.FindByIdAsync(roleId);
-        //    if (role.Result != null)
-        //        await userRepository.AddToRoleAsync(user, role.Result.NormalizedName);
-        //}
+        await userRepository.CreateAsync(user, dto.Password);
 
         if (dto.AvatarFile is not null)
         {
@@ -120,8 +111,6 @@ public class AuthenticationService : IAuthenticationService
             user.ProfileImageUrl = uploadedAvatarInfomation.MediaUrl;
             await userRepository.UpdateAsync(user);
         }
-
-        await transaction.CommitAsync(cancellationToken);
     }
     #endregion
 }
