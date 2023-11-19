@@ -4,18 +4,19 @@ import { roomInfo } from "../datas";
 import { IContext, RealDealContext } from "../../utils/context";
 import { ISettingsRoom } from "../StepsToJoinRoomContainer";
 import { calculateDiscountPrice, handleScrollToTop, } from "Components/utils/rdutil";
-import { formatter } from "Components/utils/datas";
+import { IRealEstateProject, formatter } from "Components/utils/datas";
 
 interface IStepOne {
   errors: any;
   settingsRoom: ISettingsRoom;
+  realEstateProjects: IRealEstateProject[]
   setError: (error: any) => void;
   changeStep: (stepNum: number) => void;
   images: string[];
 }
 
 export default function StepOne(props: IStepOne) {
-  const { images, errors, settingsRoom, setError, changeStep } = props;
+  const { images, errors, settingsRoom, setError, changeStep, realEstateProjects } = props;
   const { processJoinRoom, selectedRealEstate } =
     React.useContext<IContext>(RealDealContext);
   const [memberCount, setMemberCount] = React.useState<number>(
@@ -53,57 +54,12 @@ export default function StepOne(props: IStepOne) {
     <Box className="content-container" ref={stepOneRef}>
       <Box className="contents">
         <Box className="room-info">
-          {roomInfo.map((info) => {
-            let _value: any = info.value;
-
-            if (info.type === "chip") {
-              _value = (info.value as string[]).map((val: string) => {
-                return <Chip label={val} sx={{ marginRight: "10px" }} />;
-              });
-            }
-
-            return (
+          {roomInfo.map((info) => (
               <Box className="info">
-                {info.label && (
-                  <Typography sx={{ fontWeight: 600 }}>
-                    {`${info.label}:`}
-                  </Typography>
-                )}
-                {info.type === "editText" ? (
-                  <TextField
-                    disabled
-                    error={
-                      errors.filter(
-                        (error: any) => error.fieldError === "memberCounter"
-                      )?.length > 0
-                    }
-                    sx={{ width: "50px" }}
-                    label={""}
-                    defaultValue={`${memberCount}`}
-                    size="small"
-                    value={memberCount}
-                    // onChange={(evt?: any) => {
-                    //   if (evt?.target.value <= 1) {
-                    //     setError([
-                    //       ...errors,
-                    //       { isError: true, fieldError: "memberCounter" },
-                    //     ]);
-                    //   } else {
-                    //     setError((errors: any) =>
-                    //       errors.filter(
-                    //         (error: any) =>
-                    //           !(error.fieldError === "memberCounter")
-                    //       )
-                    //     );
-                    //   }
-                    // }}
-                  />
-                ) : (
-                  <Typography>{_value}</Typography>
-                )}
+
+
               </Box>
-            );
-          })}
+          ))}
         </Box>
       </Box>
       <Box className="real-estate-image">

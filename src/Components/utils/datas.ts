@@ -144,19 +144,19 @@ const TypeOfRealEstates: ITypeOfRealEstate[] =
     },
     {
         id: 4,
-        type: "Đất nền",
-    },
-    {
-        id: 5,
         type: "Bất động sản nghỉ dưỡng",
     },
     {
+        id: 5,
+        type: "Shophouse và Officetel",
+    },
+    {
         id: 6,
-        type: "Hoa viên nghĩa trang",
+        type: "Đất nền",
     },
     {
         id: 7,
-        type: "Shophouse và Officetel",
+        type: "Hoa viên nghĩa trang",
     },
     {
         id: 8,
@@ -555,7 +555,161 @@ const RealEstates: IRealEstates[] = [
 
 const RealEstateProjects: IRealEstateProject[] = 
 [
-
+  {
+    id: 1,
+    realEstateId: 0,
+    counselor: { id: 0, name: "" },
+    numberOfRoom: 3,
+    rooms: [  ],
+    investor: { id: 0, name: "" },
+    scale: Math.floor(Math.random() * 1000) + 500,
+    numberOfHouseroom: 2,
+    status: "Available",
+    type: [  ]
+  },{
+    id: 2,
+    realEstateId: 0,
+    counselor: { id: 0, name: "" },
+    numberOfRoom: 3,
+    rooms: [  ],
+    investor: { id: 0, name: "" },
+    scale: Math.floor(Math.random() * 1000) + 500,
+    numberOfHouseroom: 2,
+    status: "Available",
+    type: [  ]
+  },{
+    id: 3,
+    realEstateId: 0,
+    counselor: { id: 0, name: "" },
+    numberOfRoom: 3,
+    rooms: [  ],
+    investor: { id: 0, name: "" },
+    scale: Math.floor(Math.random() * 1000) + 500,
+    numberOfHouseroom: 2,
+    status: "Available",
+    type: [  ]
+  },{
+    id: 4,
+    realEstateId: 0,
+    counselor: { id: 0, name: "" },
+    numberOfRoom: 3,
+    rooms: [  ],
+    investor: { id: 0, name: "" },
+    scale: Math.floor(Math.random() * 1000) + 500,
+    numberOfHouseroom: 2,
+    status: "Available",
+    type: [  ]
+  },{
+    id: 5,
+    realEstateId: 0,
+    counselor: { id: 0, name: "" },
+    numberOfRoom: 3,
+    rooms: [  ],
+    investor: { id: 0, name: "" },
+    scale: Math.floor(Math.random() * 1000) + 500,
+    numberOfHouseroom: 2,
+    status: "Available",
+    type: [  ]
+  },{
+    id: 6,
+    realEstateId: 0,
+    counselor: { id: 0, name: "" },
+    numberOfRoom: 3,
+    rooms: [  ],
+    investor: { id: 0, name: "" },
+    scale: Math.floor(Math.random() * 1000) + 500,
+    numberOfHouseroom: 2,
+    status: "Available",
+    type: [  ]
+  },{
+    id: 7,
+    realEstateId: 0,
+    counselor: { id: 0, name: "" },
+    numberOfRoom: 3,
+    rooms: [  ],
+    investor: { id: 0, name: "" },
+    scale: Math.floor(Math.random() * 1000) + 500,
+    numberOfHouseroom: 2,
+    status: "Available",
+    type: [  ]
+  },{
+    id: 8,
+    realEstateId: 0,
+    counselor: { id: 0, name: "" },
+    numberOfRoom: 3,
+    rooms: [  ],
+    investor: { id: 0, name: "" },
+    scale: Math.floor(Math.random() * 1000) + 500,
+    numberOfHouseroom: 2,
+    status: "Available",
+    type: [  ]
+  },{
+    id: 9,
+    realEstateId: 0,
+    counselor: { id: 0, name: "" },
+    numberOfRoom: 3,
+    rooms: [  ],
+    investor: { id: 0, name: "" },
+    scale: Math.floor(Math.random() * 1000) + 500,
+    numberOfHouseroom: 2,
+    status: "Available",
+    type: [  ]
+  },{
+    id: 10,
+    realEstateId: 0,
+    counselor: { id: 0, name: "" },
+    numberOfRoom: 3,
+    rooms: [  ],
+    investor: { id: 0, name: "" },
+    scale: Math.floor(Math.random() * 1000) + 500,
+    numberOfHouseroom: 2,
+    status: "Available",
+    type: [  ]
+  },{
+    id: 11,
+    realEstateId: 0,
+    counselor: { id: 0, name: "" },
+    numberOfRoom: 3,
+    rooms: [  ],
+    investor: { id: 0, name: "" },
+    scale: Math.floor(Math.random() * 1000) + 500,
+    numberOfHouseroom: 2,
+    status: "Available",
+    type: [  ]
+  },{
+    id: 12,
+    realEstateId: 0,
+    counselor: { id: 0, name: "" },
+    numberOfRoom: 3,
+    rooms: [  ],
+    investor: { id: 0, name: "" },
+    scale: Math.floor(Math.random() * 1000) + 500,
+    numberOfHouseroom: 2,
+    status: "Available",
+    type: [  ]
+  },{
+    id: 13,
+    realEstateId: 0,
+    counselor: { id: 0, name: "" },
+    numberOfRoom: 3,
+    rooms: [  ],
+    investor: { id: 0, name: "" },
+    scale: Math.floor(Math.random() * 1000) + 500,
+    numberOfHouseroom: 2,
+    status: "Available",
+    type: [  ]
+  },{
+    id: 14,
+    realEstateId: 0,
+    counselor: { id: 0, name: "" },
+    numberOfRoom: 3,
+    rooms: [  ],
+    investor: { id: 0, name: "" },
+    scale: Math.floor(Math.random() * 1000) + 500,
+    numberOfHouseroom: 2,
+    status: "Available",
+    type: [  ]
+  },
 ]
 
 const carousels = [
@@ -729,7 +883,7 @@ const defaultLogin = {
 
 
 export {
-    RealEstates,
+    RealEstates, RealEstateProjects, Investors, Counselors, TypeOfRealEstates,
     carousels,
     getAboutUs, getRooms, chatAvatar,
     projectImages,
