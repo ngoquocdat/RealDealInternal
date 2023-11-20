@@ -1,7 +1,7 @@
-import { IRealEstateProject } from "../Models/RealEstateProject ";
-import { Counselors, Investors, RealEstateProjects, RealEstates, TypeOfRealEstates, getRooms } from "Components/utils/datas";
+import { IRealEstateProject, IPayment, Counselors, Investors, RealEstateProjects, RealEstates, TypeOfRealEstates, defaultPayment, getRooms, IRealEstates } from "Components/utils/datas";
 
-export default class StepsToJoinRoomService {
+export default class StepsToJoinRoomService 
+{
     getRealEstateProjects = () : IRealEstateProject[] =>
     {   
         const filteredTypes =TypeOfRealEstates.filter(type => type.id >= 1 && type.id <= 5);
@@ -15,6 +15,7 @@ export default class StepsToJoinRoomService {
 
         return RealEstateProjects.map((item) =>
         {
+            
             const realEstate = RealEstates[item.id - 1]
             item.realEstateId = item.id;
             item.counselor = Counselors[item.id -1];
@@ -25,13 +26,37 @@ export default class StepsToJoinRoomService {
             ] 
             item.rooms = ChatRooms.map((room) => 
             {
-                room.RealEstateId = realEstate.id.toString()
-                room.id = item.realEstateId.toString() + realEstate.title + realEstate.location + new Date().toLocaleString()
-                room.room = realEstate.title + new Date().getHours().toString() + new Date().getMinutes().toString()
-                return room
+                let newRoom = {...room};
+                let timestamp = new Date().toLocaleString('en-US', { year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit' });
+                newRoom.RealEstateId = realEstate.id.toString();
+                newRoom.id = item.realEstateId.toString() + realEstate.title + realEstate.location + timestamp;
+                newRoom.room = realEstate.title + new Date().getHours().toString() + new Date().getMinutes().toString();
+
+                return newRoom;
             })
 
             return item;
         });
+    }
+    getDefaultPaymentByRoomCreate = (realEstate: IRealEstates) : IPayment =>
+    {   
+        const timestamp = new Date().toLocaleString('en-US', { year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit' });
+        const payment = defaultPayment
+        const newRoom = payment.room
+        newRoom.RealEstateId = realEstate.id.toString();
+        newRoom.id = realEstate.id.toString() + realEstate.title + realEstate.location + timestamp;
+        newRoom.room = realEstate.title + new Date().getHours().toString() + new Date().getMinutes().toString();
+        return payment
+    }
+    getDefaultPaymentByRoomJoin = (realEstateId: number, roomId: string) : IPayment =>
+    {
+        const payment = defaultPayment;
+        const realEstateProject = this.getRealEstateProjects().find((project) => project.realEstateId === realEstateId);
+    
+        const room = realEstateProject?.rooms.find((room) => room.id === roomId);
+        if (room) {
+            payment.room = room;
+        }
+        return payment;
     }
 }

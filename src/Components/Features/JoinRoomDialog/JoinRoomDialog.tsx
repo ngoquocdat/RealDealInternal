@@ -35,6 +35,7 @@ export default function JoinRoomDialog(props: SimpleDialogProps)
     const { processJoinRoom, joinDialog, register } = React.useContext<IContext>(RealDealContext);
 
     const singUpInfo = React.useRef({
+      id: defaultLogin.id,
       phoneNumber: defaultLogin.phoneNumber,
       userName: defaultLogin.userName,
       userEmail: defaultLogin.userEmail,

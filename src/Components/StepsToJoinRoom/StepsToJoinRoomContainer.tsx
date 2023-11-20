@@ -1,7 +1,6 @@
 import React from "react";
 import { Box, Typography } from "@mui/material";
 import { IContext, RealDealContext } from "../utils/context";
-import StepsToJoinRoomService from "./Services/StepsToJoinRoomService";
 import ListRealEstate from "../SalePage/listRealEstate";
 import RealEstateItem from "../SalePage/realEstateItem";
 import { splitRandomRes } from "Components/utils/rdutil";
@@ -11,6 +10,7 @@ import StepTwo from "./Views/StepTwo";
 import StepThree from "./Views/StepThree";
 import StepFourth from "./Views/StepFourth";
 import "./StepsToJoinRoomContainer.scss";
+
 
 export interface ISettings {
   totalCounter: number;
@@ -39,9 +39,6 @@ export default function StepsToJoinRoomContainer(props: IStepjoinRoom) {
     apartmentPrice: 13000000000,
     discount: 12,
   });
-
-  const stepsToJoinRoomService = new StepsToJoinRoomService();
-  const testlist = stepsToJoinRoomService.getRealEstateProjects();
 
   React.useEffect(() => {
     console.log(
@@ -91,7 +88,6 @@ export default function StepsToJoinRoomContainer(props: IStepjoinRoom) {
             settings: selectedSettingRoom,
             setSettings: setSelectedSettingRoom,
           }}
-          realEstateProjects = {stepsToJoinRoomService.getRealEstateProjects()}
           images={[
             selectedRealEstate?.selectedREs?.image,
             selectedRealEstate?.selectedREs?.image,

@@ -58,6 +58,10 @@ export interface IContext {
       isUserRegistered: boolean;
       setIsUserRegistered: React.Dispatch<React.SetStateAction<boolean>>;
     };
+    creatingPayment: {
+      userCreatingPayment: any;
+      setUserCreatingPayment: React.Dispatch<React.SetStateAction<any>>;
+    };
     joinRoom: {
       userJoinedRoom: any;
       setUserJoinedRoom: React.Dispatch<React.SetStateAction<any>>;

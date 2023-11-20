@@ -62,6 +62,25 @@ export interface IRealEstates
     searchKey: string[]
 }
 
+export interface IPayment 
+{
+    id: number;
+    user: IUser;
+    memberCounter: number;
+    room: Room;
+    roomCreatePrice: number;
+    createDate: string;
+    expiredDate: string;
+}
+
+export interface IUser
+{
+    id: number;
+    userName: string;
+    userEmail: string;
+    phoneNumber: string;
+}
+
 export type AboutUs = {
   id: string,
   header: string,
@@ -90,6 +109,12 @@ export type Room = {
   RealEstateId: string,
   lastTimeChat: string,
   lastMessage: string
+}
+
+export type JoinRoomDialog = {
+  id: string,
+  name: string,
+  inputs: string[]
 }
 
 const Investors: IInvestor[] =
@@ -163,12 +188,6 @@ const TypeOfRealEstates: ITypeOfRealEstate[] =
         type: "Nhà xưởng",
     },
 ]
-
-export type JoinRoomDialog = {
-  id: string,
-  name: string,
-  inputs: string[]
-}
 
 const RealEstates: IRealEstates[] = [
     {
@@ -880,13 +899,33 @@ const projectImages = [
   },
 ];
 
-const defaultLogin = {
+const defaultLogin: IUser = {
+  id: 1,
   phoneNumber: "0934230808",
   userName: "Ngo Quoc Dat",
   userEmail: "ngoquocdat093@gmail.com",
 };
 
-
+const defaultPayment: IPayment = {
+  id: 1,
+  user: defaultLogin,
+  memberCounter: 10,
+  room: 
+  { 
+      id: "", 
+      room: "", 
+      RealEstateId: "", 
+      lastTimeChat: "", 
+      lastMessage: "" 
+  },
+  roomCreatePrice: 5000000,
+  createDate: new Date().toLocaleString(),
+  expiredDate: (() => {
+    const date = new Date();
+    date.setDate(date.getDate() + 7);
+    return date.toLocaleString();
+  })(),
+}
 
 const joinRoomDialogs = [
   {
@@ -907,9 +946,9 @@ const joinRoomDialogs = [
 
 export {
     RealEstates, RealEstateProjects, Investors, Counselors, TypeOfRealEstates,
+    defaultLogin, defaultPayment,
     carousels,
     getAboutUs, getRooms, chatAvatar,
     projectImages,
-    defaultLogin,
     joinRoomDialogs
 };

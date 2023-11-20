@@ -1,28 +1,33 @@
 import React from "react";
 import { Box, Button, Chip, TextField, Typography } from "@mui/material";
-import { roomInfo } from "../datas";
 import { IContext, RealDealContext } from "../../utils/context";
 import { ISettingsRoom } from "../StepsToJoinRoomContainer";
 import { calculateDiscountPrice, handleScrollToTop, } from "Components/utils/rdutil";
-import { ITypeOfRealEstate, Room, formatter } from "Components/utils/datas";
-import { IRealEstateProject, translate } from "../Models/RealEstateProject ";
+import { ITypeOfRealEstate, IRealEstateProject, Room, formatter } from "Components/utils/datas";
+//import { IRealEstateProject } from "../Models/RealEstateProject ";
+import MapRealEstateToInfo, { RealEstateTranslate } from "../MappingDatas/RealEstateProjectDataMapper";
+import StepsToJoinRoomService from "../Services/StepsToJoinRoomService";
 
 interface IStepOne {
   errors: any;
   settingsRoom: ISettingsRoom;
-  realEstateProjects: IRealEstateProject[]
   setError: (error: any) => void;
   changeStep: (stepNum: number) => void;
   images: string[];
 }
 
 export default function StepOne(props: IStepOne) {
-  const { images, errors, settingsRoom, setError, changeStep, realEstateProjects } = props;
-  const { processJoinRoom, selectedRealEstate } =React.useContext<IContext>(RealDealContext);
-  const [ selectedRealEstateProject ] = React.useState<IRealEstateProject>(realEstateProjects[selectedRealEstate?.selectedREs?.id]);
+  const { images, errors, settingsRoom, setError, changeStep } = props;
+  const { processJoinRoom, selectedRealEstate, creatingPayment } =React.useContext<IContext>(RealDealContext);
   const [memberCount, setMemberCount] = React.useState<number>(settingsRoom.settings.counter);
   const [discountPrice, setDiscountPrice] = React.useState<any>(null);
   const stepOneRef = React.useRef(null);
+
+  //const realEstateInfo = MapRealEstateToInfo(selectedRealEstate.selectedREs);
+
+  const stepsToJoinRoomService = new StepsToJoinRoomService();
+  const [ realEstateProjects ] = React.useState<IRealEstateProject[]>(stepsToJoinRoomService.getRealEstateProjects());
+  const [ selectedRealEstateProject ] = React.useState<IRealEstateProject>(realEstateProjects[selectedRealEstate?.selectedREs?.id - 1]);
 
   const handleDiscountPrice = (memberCounter: number) => {
     const members = Array.from(
@@ -41,6 +46,18 @@ export default function StepOne(props: IStepOne) {
     return setDiscountPrice(_priceTable[0]);
   };
 
+  const onRoomCreate = () => {
+    const newPayment = stepsToJoinRoomService.getDefaultPaymentByRoomCreate(selectedRealEstate?.selectedREs);
+  
+    creatingPayment?.setUserCreatingPayment(newPayment);
+  }
+
+  const onRoomJoin = (roomId: string) => {
+    const newPayment = stepsToJoinRoomService.getDefaultPaymentByRoomJoin(selectedRealEstate?.selectedREs?.id, roomId);
+  
+    creatingPayment?.setUserCreatingPayment(newPayment);
+  }
+
   React.useEffect(() => {
     handleDiscountPrice(memberCount);
   }, [memberCount]);
@@ -54,7 +71,7 @@ export default function StepOne(props: IStepOne) {
     return (
         <Box sx={{display: 'flex', alignItems: 'center', gap: '10px'}}>
             <Typography sx={{ fontWeight: 600 }}>
-                {translate(projectKey as keyof IRealEstateProject)}
+                {RealEstateTranslate(projectKey as keyof IRealEstateProject)}
             </Typography>
             <TextField
               disabled
@@ -72,7 +89,7 @@ export default function StepOne(props: IStepOne) {
     return (
         <Box sx={{display: 'flex', alignItems: 'center', gap: '10px'}}>
             <Typography sx={{ fontWeight: 600 }}>
-                {translate(projectKey as keyof IRealEstateProject)}
+                {RealEstateTranslate(projectKey as keyof IRealEstateProject)}
             </Typography>
             <Typography>
                 {projectValue}
@@ -86,7 +103,7 @@ export default function StepOne(props: IStepOne) {
     return (
       <Box sx={{display: 'flex', alignItems: 'center', gap: '10px'}}>
         <Typography sx={{ fontWeight: 600 }}>
-          {translate(projectKey as keyof IRealEstateProject)}
+          {RealEstateTranslate(projectKey as keyof IRealEstateProject)}
         </Typography>
         <Typography>
           {/* {projectValue.join(", ")} */}
@@ -98,23 +115,30 @@ export default function StepOne(props: IStepOne) {
 
   function PropertyChip(projectKey: string, projectValue: any[]) 
   {
-
     return (
       <Box sx={{display: 'flex', alignItems: 'center', gap: '10px'}}>
       <Typography sx={{ fontWeight: 600 }}>
-        {translate(projectKey as keyof IRealEstateProject)}
+        {RealEstateTranslate(projectKey as keyof IRealEstateProject)}
       </Typography>
       {projectValue.map((item) => {
-
           const keys = Object.keys(item);
           if (keys.includes('room')) 
           {
-            return <Chip key={item.room} label={item.room} />;
+            return(
+                <Chip key={item.room} 
+                      label={item.room} 
+                      onClick={() => 
+                        {
+                          onRoomJoin(item.id);
+                          changeStep(2);
+                        }}/>
+            );
           } 
           else if (keys.includes('type')) 
           {
             return (
-                <Chip key={item.type} label={item.type} />
+                <Chip key={item.type} 
+                      label={item.type}/>
             );
           }
         })}
@@ -132,14 +156,14 @@ export default function StepOne(props: IStepOne) {
     return (
         <Box sx={{display: 'flex', alignItems: 'center', gap: '10px'}}>
             <Typography sx={{ fontWeight: 600 }}>
-              {translate(propertyName as keyof IRealEstateProject)}
+              {RealEstateTranslate(propertyName as keyof IRealEstateProject)}
             </Typography>
             <Typography>
               {name}
             </Typography>
         </Box>
     );
-}
+  }
 
   return (
     <Box className="content-container" ref={stepOneRef}>
@@ -154,7 +178,7 @@ export default function StepOne(props: IStepOne) {
             {PropertyLabel('location', selectedRealEstate.selectedREs.location)}
             {PropertyName('investor', selectedRealEstateProject.investor)}
             {PropertyCombine('scale', [selectedRealEstateProject.scale, selectedRealEstateProject.numberOfHouseroom])}
-            {PropertyLabel('pricePerSquare', selectedRealEstate.selectedREs.pricePerSquare + " / m2")}
+            {PropertyLabel('pricePerSquare', formatter.format(selectedRealEstate.selectedREs.pricePerSquare) + " VND / m2")}
             {PropertyLabel('floorArea', selectedRealEstate.selectedREs.floorArea + " m2")}
             {PropertyLabel('status', selectedRealEstateProject.status)}
             {PropertyChip('type', selectedRealEstateProject.type)}
@@ -285,6 +309,7 @@ export default function StepOne(props: IStepOne) {
           className="signup rd-buttons contained-button"
           variant={"contained"}
           onClick={(evt?: React.MouseEvent) => {
+            onRoomCreate();
             changeStep(2);
           }}>
           Tiếp tục tạo ROOM
@@ -294,9 +319,9 @@ export default function StepOne(props: IStepOne) {
           variant="text"
           onClick={(evt?: React.MouseEvent) => {
             processJoinRoom.setIsProcessJoinRoom(false);
-            selectedRealEstate?.setSelectedREs(null);
-          }}
-        >
+            selectedRealEstate?.setSelectedREs(null)
+            creatingPayment?.setUserCreatingPayment(null);
+          }}>
           Hủy và quay lại trang tin
         </Button>
       </Box>
