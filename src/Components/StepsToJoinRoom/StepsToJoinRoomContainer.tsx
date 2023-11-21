@@ -11,6 +11,7 @@ import StepThree from "./Views/StepThree";
 import StepFourth from "./Views/StepFourth";
 import "./StepsToJoinRoomContainer.scss";
 
+
 export interface ISettings {
   totalCounter: number;
   counter: number;

@@ -1,32 +1,38 @@
-import { ICounselor, IInvestor, Room, ITypeOfRealEstate } from "Components/utils/datas";
-
 export type IRealEstateProject = {
     id: number;
     realEstateId: number;
-    counselor: ICounselor;
+    counselor: string;
     numberOfRoom: number;
-    rooms: Room[];
-    investor: IInvestor;
+    rooms: string[];
+    investor: string;
     scale: number;
     numberOfHouseroom: number;
     status: string;
-    type: ITypeOfRealEstate[];
+    type: string[];
 }
 
-const realEstateProjectTranslationMap = {
-    id: 'ID',
-    realEstateId: 'ID Bất động sản',
-    counselor: 'Nhân viên tư vấn',
-    numberOfRoom: 'Số phòng',
-    rooms: 'Phòng',
-    investor: 'Nhà đầu tư',
-    scale: 'Quy mô',
-    numberOfHouseroom: 'Tổng số căn',
-    status: 'Trạng thái',
-    type: 'Loại bất động sản',
-  };
-  
-  export function translate(propertyName: keyof IRealEstateProject)
-  {
-      return realEstateProjectTranslationMap[propertyName];
-  }
+export interface IRealEstates 
+{
+    id: number,
+    title: string,
+    image: string,
+    rsType: string,
+    location: string,
+    address: string,
+    description: string,
+    floorArea: number,
+    facilities: {
+      bathroom: number,
+      bedroom: number,
+      others: string[],
+    },
+    pricePerSquare: number,
+    price?: number,
+    priceOnRoom: number;
+    isPopular: boolean,
+    propertyTotal: number,
+    capacity: number,
+    apartmentMap: string,
+    propertyImages: string[],
+    searchKey: string[]
+}

@@ -1,10 +1,10 @@
 import { Box, Button, Checkbox, Typography,
          FormControlLabel, FormGroup, } from "@mui/material";
-import React from "react";
-import { paymentInfo } from "../datas";
+import React, { useEffect } from "react";
 import { IContext, RealDealContext } from "../../utils/context";
 import { ISettings } from "../StepsToJoinRoomContainer";
 import { formatter } from "Components/utils/datas";
+import MapPaymentToInfo from "../MappingDatas/PaymentDataMapper";
 
 interface IStepTwo {
   errors: any;
@@ -15,17 +15,24 @@ interface IStepTwo {
 
 export default function StepTwo(props: IStepTwo) {
   const { errors, settings, changeStep } = props;
-  const { processJoinRoom } = React.useContext<IContext>(RealDealContext);
+  const { processJoinRoom, creatingPayment } = React.useContext<IContext>(RealDealContext);
   const [openFee, setOpenFee] = React.useState<number>(0);
   const [methodSelected, setMethodSelected] = React.useState<any[]>([]);
+
+  //const stepsToJoinRoomService = new StepsToJoinRoomService();
+  const paymentInfo = MapPaymentToInfo(creatingPayment?.userCreatingPayment);
+
+  useEffect(() => {
+    const feeInfo = paymentInfo.find(info => info.type === 'currency');
+    if (feeInfo && !openFee) {
+      setOpenFee(Number(feeInfo.value));
+    }
+  }, [paymentInfo, openFee]); 
 
   return (
     <Box className="content-container payment">
       <Box className="payment-info">
         {paymentInfo.map((info) => {
-          if (info.type === "currency" && !openFee) {
-            setOpenFee(Number(info.value));
-          }
           if (info.key === "memberCounter") {
             info.value = `${settings.counter}`;
           }
@@ -59,8 +66,7 @@ export default function StepTwo(props: IStepTwo) {
               }}
             />
           }
-          label="Thanh toán thông qua QR code momo"
-        />
+          label="Thanh toán thông qua QR code momo"/>
         <FormControlLabel
           className="bank-payment"
           control={
@@ -78,8 +84,7 @@ export default function StepTwo(props: IStepTwo) {
               }}
             />
           }
-          label="Thanh toán thông qua QR code chuyển khoản"
-        />
+          label="Thanh toán thông qua QR code chuyển khoản"/>
       </FormGroup>
       <Box sx={{ gridColumn: "5/6" }}>
         <Typography variant="h6" sx={{ fontWeight: 600 }}>
@@ -103,6 +108,7 @@ export default function StepTwo(props: IStepTwo) {
           className="signup rd-buttons contained-button"
           variant={"contained"}
           onClick={(evt?: React.MouseEvent) => {
+            creatingPayment?.setUserCreatingPayment(null)
             changeStep(1);
           }}
         >
@@ -129,7 +135,8 @@ export default function StepTwo(props: IStepTwo) {
           className="signin rd-buttons text-button"
           variant="text"
           onClick={(evt?: React.MouseEvent) => {
-            processJoinRoom.setIsProcessJoinRoom(false);
+            processJoinRoom.setIsProcessJoinRoom(false)
+            creatingPayment?.setUserCreatingPayment(null);
           }}
         >
           Hủy và quay lại trang tin

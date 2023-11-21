@@ -44,6 +44,7 @@ export default function MainContainer() {
   const [isOpenDetailsDialog, setIsOpenDetailsDialog] =
     React.useState<boolean>(false);
   const [selectedREs, setSelectedREs] = React.useState<any>(null);
+  const [userCreatingPayment, setUserCreatingPayment] = React.useState<any>(null);
 
   const handleRenderContent = () => {
     let redirectComp = renderContent;
@@ -98,6 +99,10 @@ export default function MainContainer() {
     selectedRealEstate: {
       selectedREs: selectedREs,
       setSelectedREs: setSelectedREs,
+    },
+    creatingPayment: {
+      userCreatingPayment: userCreatingPayment,
+      setUserCreatingPayment: setUserCreatingPayment,
     },
   };
 

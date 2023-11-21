@@ -62,6 +62,25 @@ export interface IRealEstates
     searchKey: string[]
 }
 
+export interface IPayment 
+{
+    id: number;
+    user: IUser;
+    memberCounter: number;
+    room: Room;
+    roomCreatePrice: number;
+    createDate: string;
+    expiredDate: string;
+}
+
+export interface IUser
+{
+    id: number;
+    userName: string;
+    userEmail: string;
+    phoneNumber: string;
+}
+
 export type AboutUs = {
   id: string,
   header: string,
@@ -90,6 +109,12 @@ export type Room = {
   RealEstateId: string,
   lastTimeChat: string,
   lastMessage: string
+}
+
+export type JoinRoomDialog = {
+  id: string,
+  name: string,
+  inputs: string[]
 }
 
 const Investors: IInvestor[] =
@@ -144,31 +169,25 @@ const TypeOfRealEstates: ITypeOfRealEstate[] =
     },
     {
         id: 4,
-        type: "Đất nền",
-    },
-    {
-        id: 5,
         type: "Bất động sản nghỉ dưỡng",
     },
     {
+        id: 5,
+        type: "Shophouse và Officetel",
+    },
+    {
         id: 6,
-        type: "Hoa viên nghĩa trang",
+        type: "Đất nền",
     },
     {
         id: 7,
-        type: "Shophouse và Officetel",
+        type: "Hoa viên nghĩa trang",
     },
     {
         id: 8,
         type: "Nhà xưởng",
     },
 ]
-
-export type JoinRoomDialog = {
-  id: string,
-  name: string,
-  inputs: string[]
-}
 
 const RealEstates: IRealEstates[] = [
     {
@@ -561,7 +580,161 @@ const RealEstates: IRealEstates[] = [
 
 const RealEstateProjects: IRealEstateProject[] = 
 [
-
+  {
+    id: 1,
+    realEstateId: 0,
+    counselor: { id: 0, name: "" },
+    numberOfRoom: 3,
+    rooms: [  ],
+    investor: { id: 0, name: "" },
+    scale: Math.floor(Math.random() * 10000) + 500,
+    numberOfHouseroom: Math.floor(Math.random() * 300) + 500,
+    status: "Available",
+    type: [  ]
+  },{
+    id: 2,
+    realEstateId: 0,
+    counselor: { id: 0, name: "" },
+    numberOfRoom: 3,
+    rooms: [  ],
+    investor: { id: 0, name: "" },
+    scale: Math.floor(Math.random() * 10000) + 500,
+    numberOfHouseroom: Math.floor(Math.random() * 300) + 500,
+    status: "Available",
+    type: [  ]
+  },{
+    id: 3,
+    realEstateId: 0,
+    counselor: { id: 0, name: "" },
+    numberOfRoom: 3,
+    rooms: [  ],
+    investor: { id: 0, name: "" },
+    scale: Math.floor(Math.random() * 10000) + 500,
+    numberOfHouseroom: Math.floor(Math.random() * 300) + 500,
+    status: "Available",
+    type: [  ]
+  },{
+    id: 4,
+    realEstateId: 0,
+    counselor: { id: 0, name: "" },
+    numberOfRoom: 3,
+    rooms: [  ],
+    investor: { id: 0, name: "" },
+    scale: Math.floor(Math.random() * 10000) + 500,
+    numberOfHouseroom: Math.floor(Math.random() * 300) + 500,
+    status: "Available",
+    type: [  ]
+  },{
+    id: 5,
+    realEstateId: 0,
+    counselor: { id: 0, name: "" },
+    numberOfRoom: 3,
+    rooms: [  ],
+    investor: { id: 0, name: "" },
+    scale: Math.floor(Math.random() * 10000) + 500,
+    numberOfHouseroom: Math.floor(Math.random() * 300) + 500,
+    status: "Available",
+    type: [  ]
+  },{
+    id: 6,
+    realEstateId: 0,
+    counselor: { id: 0, name: "" },
+    numberOfRoom: 3,
+    rooms: [  ],
+    investor: { id: 0, name: "" },
+    scale: Math.floor(Math.random() * 10000) + 500,
+    numberOfHouseroom: Math.floor(Math.random() * 300) + 500,
+    status: "Available",
+    type: [  ]
+  },{
+    id: 7,
+    realEstateId: 0,
+    counselor: { id: 0, name: "" },
+    numberOfRoom: 3,
+    rooms: [  ],
+    investor: { id: 0, name: "" },
+    scale: Math.floor(Math.random() * 10000) + 500,
+    numberOfHouseroom: Math.floor(Math.random() * 300) + 500,
+    status: "Available",
+    type: [  ]
+  },{
+    id: 8,
+    realEstateId: 0,
+    counselor: { id: 0, name: "" },
+    numberOfRoom: 3,
+    rooms: [  ],
+    investor: { id: 0, name: "" },
+    scale: Math.floor(Math.random() * 10000) + 500,
+    numberOfHouseroom: Math.floor(Math.random() * 300) + 500,
+    status: "Available",
+    type: [  ]
+  },{
+    id: 9,
+    realEstateId: 0,
+    counselor: { id: 0, name: "" },
+    numberOfRoom: 3,
+    rooms: [  ],
+    investor: { id: 0, name: "" },
+    scale: Math.floor(Math.random() * 10000) + 500,
+    numberOfHouseroom: Math.floor(Math.random() * 300) + 500,
+    status: "Available",
+    type: [  ]
+  },{
+    id: 10,
+    realEstateId: 0,
+    counselor: { id: 0, name: "" },
+    numberOfRoom: 3,
+    rooms: [  ],
+    investor: { id: 0, name: "" },
+    scale: Math.floor(Math.random() * 10000) + 500,
+    numberOfHouseroom: Math.floor(Math.random() * 300) + 500,
+    status: "Available",
+    type: [  ]
+  },{
+    id: 11,
+    realEstateId: 0,
+    counselor: { id: 0, name: "" },
+    numberOfRoom: 3,
+    rooms: [  ],
+    investor: { id: 0, name: "" },
+    scale: Math.floor(Math.random() * 10000) + 500,
+    numberOfHouseroom: Math.floor(Math.random() * 300) + 500,
+    status: "Available",
+    type: [  ]
+  },{
+    id: 12,
+    realEstateId: 0,
+    counselor: { id: 0, name: "" },
+    numberOfRoom: 3,
+    rooms: [  ],
+    investor: { id: 0, name: "" },
+    scale: Math.floor(Math.random() * 10000) + 500,
+    numberOfHouseroom: Math.floor(Math.random() * 300) + 500,
+    status: "Available",
+    type: [  ]
+  },{
+    id: 13,
+    realEstateId: 0,
+    counselor: { id: 0, name: "" },
+    numberOfRoom: 3,
+    rooms: [  ],
+    investor: { id: 0, name: "" },
+    scale: Math.floor(Math.random() * 10000) + 500,
+    numberOfHouseroom: Math.floor(Math.random() * 300) + 500,
+    status: "Available",
+    type: [  ]
+  },{
+    id: 14,
+    realEstateId: 0,
+    counselor: { id: 0, name: "" },
+    numberOfRoom: 3,
+    rooms: [  ],
+    investor: { id: 0, name: "" },
+    scale: Math.floor(Math.random() * 10000) + 500,
+    numberOfHouseroom: Math.floor(Math.random() * 300) + 500,
+    status: "Available",
+    type: [  ]
+  },
 ]
 
 const carousels = [
@@ -726,13 +899,33 @@ const projectImages = [
   },
 ];
 
-const defaultLogin = {
+const defaultLogin: IUser = {
+  id: 1,
   phoneNumber: "0934230808",
   userName: "Ngo Quoc Dat",
   userEmail: "ngoquocdat093@gmail.com",
 };
 
-
+const defaultPayment: IPayment = {
+  id: 1,
+  user: defaultLogin,
+  memberCounter: 10,
+  room: 
+  { 
+      id: "", 
+      room: "", 
+      RealEstateId: "", 
+      lastTimeChat: "", 
+      lastMessage: "" 
+  },
+  roomCreatePrice: 5000000,
+  createDate: new Date().toLocaleString(),
+  expiredDate: (() => {
+    const date = new Date();
+    date.setDate(date.getDate() + 7);
+    return date.toLocaleString();
+  })(),
+}
 
 const joinRoomDialogs = [
   {
@@ -752,10 +945,10 @@ const joinRoomDialogs = [
 ]
 
 export {
-    RealEstates,
+    RealEstates, RealEstateProjects, Investors, Counselors, TypeOfRealEstates,
+    defaultLogin, defaultPayment,
     carousels,
     getAboutUs, getRooms, chatAvatar,
     projectImages,
-    defaultLogin,
     joinRoomDialogs
 };
