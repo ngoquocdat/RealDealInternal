@@ -8,7 +8,7 @@ interface IStepThree {
 
 export default function StepThree(props: IStepThree) {
   const { changeStep } = props;
-  const { processJoinRoom } = React.useContext<IContext>(RealDealContext);
+  const { processJoinRoom, creatingPayment, selectedRealEstate } = React.useContext<IContext>(RealDealContext);
 
   React.useEffect(() => {
     const timer = setTimeout(() => {
@@ -47,12 +47,11 @@ export default function StepThree(props: IStepThree) {
           4. Xác nhận thanh toán
         </Typography>
         <Typography
-          sx={{ padding: "0px 10px 0px", fontWeight: 600, paddingTop: "50px" }}
-        >
+          sx={{ padding: "0px 10px 0px", fontWeight: 600, paddingTop: "50px" }}>
           Thông tin ghi chú khi thanh toán:
         </Typography>
         <Typography sx={{ padding: "10px 10px 0px" }}>
-          TDA_ConsultantNHA_2023_ROOM_BDS200235
+          {selectedRealEstate?.selectedREs?.title}
         </Typography>
       </Box>
       <Box
@@ -67,8 +66,11 @@ export default function StepThree(props: IStepThree) {
         <Button
           className="signin rd-buttons text-button"
           variant="text"
-          onClick={() => processJoinRoom.setIsProcessJoinRoom(false)}
-        >
+          onClick={() => 
+          {
+            creatingPayment.setUserCreatingPayment(null);
+            processJoinRoom.setIsProcessJoinRoom(false);
+          }}>
           Hủy và quay lại trang tin
         </Button>
       </Box>

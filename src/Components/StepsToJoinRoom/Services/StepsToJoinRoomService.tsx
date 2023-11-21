@@ -1,4 +1,6 @@
-import { IRealEstateProject, IPayment, Counselors, Investors, RealEstateProjects, RealEstates, TypeOfRealEstates, defaultPayment, getRooms, IRealEstates } from "Components/utils/datas";
+import { IRealEstateProject, IPayment, 
+         Counselors, Investors, RealEstates, TypeOfRealEstates, IRealEstates, 
+         RealEstateProjects, defaultPayment, getRooms } from "Components/utils/datas";
 
 export default class StepsToJoinRoomService 
 {

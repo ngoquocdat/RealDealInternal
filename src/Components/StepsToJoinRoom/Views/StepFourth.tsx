@@ -7,7 +7,6 @@ interface IStepFourth {
 }
 
 export default function StepFourth(props: IStepFourth) {
-  const roomCode = "TDA_ConsultantNHA_2023";
   const { toChatRoom } = props;
   const {
     processJoinRoom,
@@ -16,11 +15,12 @@ export default function StepFourth(props: IStepFourth) {
     joinDialog,
     handleRedirect,
     selectedRealEstate,
+    creatingPayment
   } = React.useContext<IContext>(RealDealContext);
 
   React.useEffect(() => {
     joinRoom.setUserJoinedRoom((joinedRoom: any[]) => {
-      return [...joinedRoom, roomCode];
+      return [...joinedRoom, creatingPayment?.userCreatingPayment?.room];
     });
   }, []);
 
@@ -34,13 +34,12 @@ export default function StepFourth(props: IStepFourth) {
       <Box sx={{ gridColumn: "2/6", padding: "20px 80px" }}>
         <Typography
           variant="h5"
-          sx={{ fontWeight: 600, paddingBottom: "50px" }}
-        >
+          sx={{ fontWeight: 600, paddingBottom: "50px" }}>
           Thanh toán thành công
         </Typography>
         <Typography sx={{ paddingBottom: "50px" }}>
           Bạn đã tham gia thành công dự án mua căn hộ{" "}
-          <b>Dự án thành phố Thủ đức A</b> , mời bạn vào phòng tư vấn để tư vấn
+          <b>Dự án {selectedRealEstate?.selectedREs?.title}</b> , mời bạn vào phòng tư vấn để tư vấn
           viên hỗ trợ cho bạn chi tiết thông tin về bất động sản
         </Typography>
         <Box
@@ -56,27 +55,27 @@ export default function StepFourth(props: IStepFourth) {
             className="signup rd-buttons contained-button"
             variant={"contained"}
             onClick={() => {
+              creatingPayment.setUserCreatingPayment(null)
               selectedRealEstate?.setSelectedREs(null);
               joinDialog.toggleIsOpenDialog(false);
               handleRedirect.setUrl("/chat");
               // eslint-disable-next-line @typescript-eslint/no-unused-expressions
               handleRedirect.redirect;
-            }}
-          >
+            }}>
             Booked Real Estate
           </Button>
           <Button
             className="signin rd-buttons contained-button"
             variant="contained"
             onClick={() => {
+              creatingPayment.setUserCreatingPayment(null)
               processJoinRoom.setIsProcessJoinRoom(false);
               joinDialog.toggleIsOpenDialog(false);
               selectedRealEstate?.setSelectedREs(null);
               handleRedirect.setUrl("/");
               // eslint-disable-next-line @typescript-eslint/no-unused-expressions
               handleRedirect.redirect;
-            }}
-          >
+            }}>
             Real Estate On Sales
           </Button>
         </Box>

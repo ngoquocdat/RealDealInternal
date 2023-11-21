@@ -3,7 +3,7 @@ import { Avatar, Box, Button, Chip, TextField, Typography } from "@mui/material"
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import { AvatarGenerator } from "random-avatar-generator";
 import { IContext, RealDealContext } from "../../utils/context";
-import { defaultLogin } from "Components/utils/datas";
+import { Room, defaultLogin } from "Components/utils/datas";
 import { uniq } from "../../main";
 import "./SignUp.scss";
 
@@ -64,9 +64,9 @@ export default function SignUp(props: ISignUp) {
               Chat rooms:
               {joinRoom.userJoinedRoom?.length ? (
                 <Box>
-                  {uniq(joinRoom.userJoinedRoom).map((r: string) => (
+                  {uniq(joinRoom.userJoinedRoom).map((room: Room) => (
                     <Chip
-                      label={r}
+                      label={ room.room }
                       sx={{
                         backgroundColor: "#FBB713",
                         color: "#fff",
