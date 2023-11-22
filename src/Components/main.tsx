@@ -25,7 +25,7 @@ export default function MainContainer() {
   const menuItems = [
     { title: "HOME", url: "/" },
     // { title: "PROPERTY", url: "/property" },
-    // { title: "NEWS", url: "/news" },
+    { title: "NEWS", url: "/news" },
     { title: "WHAT'S REALDEAL ?", url: "/about" },
     { title: "CHAT ROOM", url: "/chat" },
   ];
