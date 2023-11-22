@@ -11,7 +11,7 @@ export interface IAuthServiceModel {
 }
 
 export function AuthService(): IAuthServiceModel {
-  const controllerPath = "auth";
+  const controllerPath = "Authentication";
   const [credential, setCredential] = useState(getUserInforFromStorage());
 
   function setNewCredentialInfor(newCredential?: Credential) {

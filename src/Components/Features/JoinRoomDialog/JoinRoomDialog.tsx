@@ -12,7 +12,8 @@ import JoinRoomDialogService from "./Services/JoinRoomDialogService";
 import ErrorOutlineIcon from "@mui/icons-material/ErrorOutline";
 import CloseIcon from "@mui/icons-material/Close";
 import "./JoinRoomDialog.scss";
-
+import { useAuth } from "../../../contexts/AuthContext";
+import { CListGroup } from "@coreui/react";
 
 
 export interface SimpleDialogProps {
@@ -33,6 +34,7 @@ export default function JoinRoomDialog(props: SimpleDialogProps)
     const dialogs = joinRoomDialogService.getDialog()
     const { open, onClose } = props;
     const { processJoinRoom, joinDialog, register } = React.useContext<IContext>(RealDealContext);
+    const {login} = useAuth();
 
     const singUpInfo = React.useRef({
       phoneNumber: defaultLogin.phoneNumber,
@@ -47,6 +49,15 @@ export default function JoinRoomDialog(props: SimpleDialogProps)
         processJoinRoom.setIsProcessJoinRoom(isAccept);
       }
     };
+
+    const handleLogin = async ()=>{
+      try{
+        await login({username:"long",password:"123123"});
+
+      }catch(err){
+        console.log(err);
+      }
+    }
 
     return (
       <Dialog
@@ -155,7 +166,8 @@ export default function JoinRoomDialog(props: SimpleDialogProps)
                               label="Remember password"
                               sx={{width: '300px', margin: '0px 0px 20px 0px'}}/>
                           <Button className="signup rd-buttons contained-button"
-                                  variant={register.isUserRegistered ? "text" : "contained"}>
+                                  variant={register.isUserRegistered ? "text" : "contained"} 
+                                  onClick={handleLogin}>
                             {dialogs[0].name}
                           </Button>
                           <Typography sx={{ margin: '160px 0px 0px 0px' }}  >
