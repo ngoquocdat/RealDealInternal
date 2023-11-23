@@ -133,18 +133,26 @@ export default function ListRealEstate(props: IListRealEstate) {
           styling={{ flex: "0 1 100%", padding: "30px 0px !important" }}
         />
       )}
-      {posts?.length
-        ? posts.map((rs) => {
-            console.log("posts posts : ", posts);
-            return (
-              <RealEstateItem
-                scrollTop={scrollTop}
-                realestate={rs}
-                posts={posts}
-              />
-            );
-          })
-        : ""}
+      <Box sx={{
+        width: "100%",
+        display: "flex",
+        alignItems: "start",
+        flexWrap: "wrap",
+        justifyContent: "space-between",
+      }}>
+        {posts?.length
+          ? posts.map((rs) => {
+              console.log("posts posts : ", posts);
+              return (
+                <RealEstateItem
+                  scrollTop={scrollTop}
+                  realestate={rs}
+                  posts={posts}
+                />
+              );
+            })
+          : ""}
+      </Box>
       {renderPaging()}
     </Box>
   );

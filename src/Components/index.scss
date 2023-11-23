@@ -23,19 +23,16 @@
     .grid {
         display: grid;
         grid-gap: 1em;
-        padding: 30px 80px;
+        padding: 2em 4em;
         height: 100%;
 
         .header {
-            display: grid;
-            grid-column: 1/4;
-            grid-auto-flow: column;
-            grid-template-columns: max-content;
+            display: flex;
             gap: 30px;
 
             .logo {
-                width: 136px;
-                height: 136px;
+                // width: 136px;
+                // height: 136px;
                 border-radius: 10px;
                 // background-color: #FBB713;
                 background-color: #ffcc41;
@@ -47,22 +44,26 @@
             }
 
             .mainMenu-container {
-                display: grid;
-                grid-auto-flow: column;
-                grid-template-columns: 60% 40%;
+                flex: 1;
+                display: flex;
+                justify-content: space-between;
+                gap: 20px;
+                flex-wrap: wrap; 
 
                 .mainMenu {
-                    display: grid;
-                    grid-auto-flow: column;
-                    grid-template-columns: 90% 10%;
+                    display: flex;                    
                     height: 48px;
+                    flex: 0.6;
 
                     ul {
                         list-style-type: none;
-                        display: grid;
-                        grid-auto-flow: column;
+                        flex:1;
+                        display: flex; 
+                        justify-content: space-around;
+                        // gap: 20px;
                         background-color: rgba(217, 217, 217, 0.36);
                         margin: 0px;
+                        padding: 0;
     
                         & > li {
                             display: inline-flex;
@@ -88,6 +89,7 @@
                     }
                 }
                 .signup-container {
+                    flex: 0.4;
                     margin: 5px 0px 25px;
                     display: grid;
                     // grid-template-columns: 50%;
@@ -106,6 +108,12 @@
                         // }
                     }
                 }
+            }
+
+            @media (width<=900px) {
+                .mainMenu-container .mainMenu, .signup-container{
+                    flex: default;
+                }           
             }
         }
         .real-estate-news-wrapper {
@@ -169,6 +177,7 @@
             // border: solid 1px rgb(228, 224, 224);
             display: grid;
             height: 100%;
+            width: 100%;
             
             .carousel {
                 height: 320px;
@@ -348,3 +357,4 @@
         }
     }
 }
+
