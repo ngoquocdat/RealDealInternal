@@ -119,26 +119,28 @@ export default function SignUp(props: ISignUp) {
               }}
             />
           </div> */}
-          <div className="buttons-wrapper" style={{width: "450px", height: '40px',}}>
-              <Box sx={{ display: 'flex', alignItems: 'center', gap: '10px', border: 'solid 1px #d9d9d9', borderRadius: '40px' }}>
+          <div className="buttons-wrapper" style={{height: '40px',}}>
+              <Box sx={{ display: 'flex', alignItems: 'center', gap: '5px', border: 'solid 1px #d9d9d9', borderRadius: '40px' }}>
                   <Box sx={{ height: '35px', width: '35px', border: 'solid 1px #d9d9d9', borderRadius: '50%', padding: '3px'}}>
                       <Avatar sx={{ height: '35px', width: '35px'}}/>
                   </Box>
                   <Typography 
                     sx={{ 
-                      width: '200px', 
-                      display: 'flex',
-                      justifyContent: 'start',
-                      alignItems: 'center',  
-                      textAlign: 'start'
-                    }}>
+                      paddingRight: '10px',
+                      overflow: 'hidden',
+                      textOverflow: 'ellipsis',
+                      WebkitLineClamp: '1',
+                      WebkitBoxOrient: 'vertical',                      
+                    }}          
+                    display={{ xs: 'none', md: '-webkit-box' }}     
+                   >
                     You Are Not Login Yet
                   </Typography>
               </Box>
               <Button className="signup rd-buttons contained-button" 
                       variant={register.isUserRegistered ? "text" : "contained"}
                       onClick={handleOpenJoinDialog}>
-                Register / Login
+                Login
               </Button>
 
               {/* <Button

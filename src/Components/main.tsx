@@ -145,6 +145,8 @@ export default function MainContainer() {
               <Box
                 className="logo"
                 component="img"
+                height={{xs:"50px", md: "136px"}}
+                width={{ xs:"50px",md: "136px"}}
                 src="https://newhome.qodeinteractive.com/wp-content/themes/newhome/assets/img/logo.svg"
               />
               {/** Main menu */}

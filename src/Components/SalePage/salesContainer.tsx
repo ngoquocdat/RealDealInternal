@@ -6,6 +6,7 @@ import RDSearch from "../Features/Search";
 import FullScreenDialog from "../Features/DetailsDialog";
 import { IContext, RealDealContext } from "../utils/context";
 import { IRealEstates, RealEstates } from "Components/utils/datas";
+import { useViewport } from "../../contexts/ViewportContext";
 
 export default function SalesContainer() {
   const [dataBestChoice, setDataBestChoice] = React.useState<IRealEstates[]>(
@@ -14,6 +15,7 @@ export default function SalesContainer() {
   const [listRes, setListRes] = React.useState<IRealEstates[]>([]);
   const [listSearch, setListSearch] = React.useState<any>(null);
   const { selectedRealEstate } = React.useContext<IContext>(RealDealContext);
+  const {isDesktop} = useViewport();
 
   const handleBannerSearch = (searchOpts: any) => {
     console.log("handleBannerSearch: ", searchOpts);
@@ -42,7 +44,7 @@ export default function SalesContainer() {
             fontSize: 36,
             top: "60%",
             position: "relative",
-            right: "35%",
+            right: isDesktop? "30%" : "0%",
           }}
         >
           Find you{" "}
@@ -57,8 +59,8 @@ export default function SalesContainer() {
             borderRadius: "3px",
             backgroundColor: "rgba(225, 225, 225, 0.3)",
             border: "solid 4px rgba(225, 225, 225, 1)",
-            top: "60%",
-            right: "27%",
+            top:"60%",
+            right: isDesktop ? "20%" : "0%",
           }}
         />
       </Box>

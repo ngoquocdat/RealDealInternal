@@ -20,6 +20,7 @@ import WaterIcon from "@mui/icons-material/Water";
 import { IRealEstates } from "../utils/datas";
 import { getPrice } from "Components/utils/rdutil";
 import { IContext, RealDealContext } from "Components/utils/context";
+import { useViewport } from "../../contexts/ViewportContext";
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
@@ -67,6 +68,7 @@ export default function BestChoiceRealEstate({ data }: IBestChoiceRealEstate) {
   const { selectedRealEstate, detailsDialog, translate } =
     React.useContext<IContext>(RealDealContext);
   const sxStyled = styleDefined();
+  const {isDesktop} = useViewport();
 
   React.useEffect(() => {
     console.log("translate keys: ", translate);
@@ -80,7 +82,7 @@ export default function BestChoiceRealEstate({ data }: IBestChoiceRealEstate) {
           fontWeight: 500,
           fontFamily: "Poppins,sans-serif",
           textAlign: "initial",
-          marginLeft: "220px",
+          marginLeft: isDesktop? "220px": "100px",
           padding: "20px 0px 30px 0px",
         }}
       >
@@ -90,7 +92,7 @@ export default function BestChoiceRealEstate({ data }: IBestChoiceRealEstate) {
       <Grid container spacing={2} sx={{ maxWidth: "100vw", margin: "auto" }}>
         {data.map((property, index) => {
           return (
-            <Grid item xs={index < 1 ? 7 : index > 1 ? 4 : 5}>
+            <Grid item md={index < 1 ? 7 : index > 1 ? 4 : 5} xs={12}>
               <Item
                 sx={{
                   backgroundImage: `url(${property.image})`,

@@ -14,6 +14,7 @@ import React, { useEffect } from "react";
 import { IRealEstates } from "../utils/datas";
 import { IContext, RealDealContext, lorem } from "../utils/context";
 import { calculateDiscountPrice, getPrice } from "Components/utils/rdutil";
+import { useViewport } from "../../contexts/ViewportContext";
 interface IRealEstateItem {
   onBooking?: boolean;
   scrollTop?: () => void;
@@ -26,6 +27,7 @@ export default function RealEstateItem(props: IRealEstateItem) {
   const { selectedRealEstate, detailsDialog } =
     React.useContext<IContext>(RealDealContext);
   const highestDiscountPrice = calculateDiscountPrice(0, realestate, 30);
+  const { isDesktop, isTablet } = useViewport();
 
   const renderComp = (rs: IRealEstates) => {
     return rs?.facilities?.others.map((place: any) => {
@@ -54,12 +56,12 @@ export default function RealEstateItem(props: IRealEstateItem) {
   return (
     <Box
       sx={{
-        width: "90%",
+        // width: isDesktop ? "30%": (isTablet ? "48%" : "100%"),
         height: "fit-content",
         flex: "0 1 calc(33% - 1em)",
         textAlign: "left",
         fontFamily: "Poppins,sans-serif",
-        margin: "auto",
+        // margin: "auto",
         paddingTop: "60px",
       }}
     >
@@ -77,7 +79,7 @@ export default function RealEstateItem(props: IRealEstateItem) {
             color: "#fff",
             position: "absolute",
             top: "20px",
-            right: "-3%",
+            right: "-1%",
             backgroundColor: `${
               realestate?.isPopular
                 ? "#d25319"
